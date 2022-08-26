@@ -1,0 +1,14 @@
+2.1: Adding layoutdlg to editordlg
+	-Files:
+		-EditorDialog.h
+		-EditorDialog.cpp
+		-LayoutDlg.h
+
+
+
+iPodWizardDlg.cpp
+
+fix impls
+CiPodfWizzardDlg::RefreshiPodDrives()
+void CiPodWizardDlg::OnBnClickedWriteFirmwareButton()
+void CiPodWizardDlg::OnBnClickedLoadipodfwButton()

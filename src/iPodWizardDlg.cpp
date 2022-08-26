@@ -5,6 +5,7 @@
 #include "iPodWizard.h"
 #include "iPodWizardDlg.h"
 #include ".\ipodwizarddlg.h"
+//#include <afxctl.h>
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -35,7 +36,7 @@ public:
 	{
 		m_pHandler=pHandler;
 	}
-
+	
 	void HookEvents(IiPodManager *piPodM)
 	{
 		__hook(&_IiPodManagerEvents::OniPodStatusChanged, piPodM, &iPodEvents::OniPodStatusChanged);
@@ -482,6 +483,7 @@ void CiPodWizardDlg::OnBnClickedTweaks()
 
 void CiPodWizardDlg::RefreshiPodDrives()
 {
+	/*
 	//clean combo
 	m_iPodDriveCombo.ResetContent();
 	m_iPodDevices.RemoveAll();
@@ -489,7 +491,8 @@ void CiPodWizardDlg::RefreshiPodDrives()
 	CString ipod_list; //ipod drives list
 	
 	//Find the iPod devices (check hidden partition == firmware)
-	unsigned char buffer[BLOCK_SIZE];
+	int j = theApp.BLOCK_SIZE;
+	unsigned char buffer[19];
 	int x,list[10]={0},y=0;
 	for (x = 1; x < 10; x++)
 	{
@@ -500,11 +503,11 @@ void CiPodWizardDlg::RefreshiPodDrives()
 		dev = _wopen (devstring, O_RDONLY | _O_RAW);
 
 		if (dev == -1)
-			continue;
+			continue; //lol
 	      
 		lseek(dev, FIRMWARE_START, SEEK_SET);
 		read(dev, buffer, BLOCK_SIZE);
-
+		
 		for (j = 0; j < BLOCK_SIZE - 6; j++)
 		{
 
@@ -512,6 +515,8 @@ void CiPodWizardDlg::RefreshiPodDrives()
 			{
 				y++;			
 				list[y]=x;
+				//populates a list of active ipods via physcialdrive expanded value
+				//y is index offset (like a file pointer)
 			}
 		}
 	      
@@ -639,7 +644,7 @@ ShowStatus:
 		m_iPodDriveCombo.SetCurSel(0);
 		theApp.m_DeviceSel=m_iPodDevices.GetAt(m_iPodDriveCombo.GetCurSel());
 	}
-	
+	*/
 }
 
 void CiPodWizardDlg::OnCbnSelChangeiPodDriveCombo()
@@ -852,6 +857,7 @@ void CiPodWizardDlg::UpdatePages()
 
 void CiPodWizardDlg::OnBnClickedWriteFirmwareButton()
 {
+	/*
 	if (m_iPodFirm)
 	{
 		if (MessageBox(TEXT("Are you sure you want to write the modified firmware to your iPod?"), TEXT("Warning"), MB_YESNO) != IDYES)
@@ -996,7 +1002,7 @@ void CiPodWizardDlg::OnBnClickedWriteFirmwareButton()
 			if (s.Compare(TEXT("1")))
 				MessageBox(s);
 		}
-	}
+	}*/
 }
 
 void CiPodWizardDlg::UpdateChecksums()
@@ -1039,6 +1045,7 @@ void CiPodWizardDlg::OnBnClickedAbout()
 
 void CiPodWizardDlg::OnBnClickedLoadipodfwButton()
 {
+	/*
 	if (CheckiPod(FALSE)==-1)
 		return;
 
@@ -1108,6 +1115,7 @@ void CiPodWizardDlg::OnBnClickedLoadipodfwButton()
 	
 	m_iPodFirm=TRUE;
 	GetDlgItem(IDC_WRITE_FIRMWARE_BUTTON)->EnableWindow(TRUE);
+	*/
 }
 
 void CiPodWizardDlg::OnCbnSelchangeModeCombo()

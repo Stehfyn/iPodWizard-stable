@@ -1,0 +1,590 @@
+
+[ emitidl( push ) ];
+[ emitidl( true ) ];
+//
+// Forward references and typedefs
+//
+
+struct __declspec(uuid("46bc1593-fe6b-419c-922d-af3591aed129"))
+/* LIBID */ __IPODSERVICELib;
+enum EFormatState;
+enum _EDeviceStatus;
+enum _EDBNotification;
+enum _EUnlockNotification;
+enum _EFileCopyStatus;
+enum EiPodState;
+enum EAutomaticUpdateMode;
+enum EiPodDBFilter;
+enum ECopyThreadStatus;
+enum EIPodClass;
+enum EiPodErrors;
+enum EFormatFlags;
+enum ETrackOrders;
+struct TrackInformation;
+struct AddTrackStatus;
+[export] __interface __declspec(uuid("31e3fbaf-c200-4776-9dbf-45226765cf4d"))
+/* dual interface */ IiPodManager;
+[export] __interface __declspec(uuid("3be5a207-40f6-4f25-bf37-27b898660b67"))
+/* dual interface */ IiPodPreferences;
+[export] __interface __declspec(uuid("42a63984-1154-4995-a75e-2e92f75ed902"))
+/* dual interface */ IiPodUpdater;
+[export] __interface __declspec(uuid("65e1d175-369d-412f-bbbf-a5e042c220e7"))
+/* dual interface */ IiPodUser;
+[export] __interface __declspec(uuid("4d56b972-8259-4833-9ab2-543962f5cf5b"))
+/* dispinterface */ _IiPodManagerEvents;
+[export] __interface __declspec(uuid("7a1aad4c-a417-439c-9318-d6bdc63fa46a"))
+/* dispinterface */ _IiPodUpdaterEvents;
+struct /* coclass */ iPodManager;
+typedef [export] long IPODAPPID;
+typedef [export] long HIPOD;
+typedef [export] long HDB;
+typedef [export] long HTRACK;
+typedef [export] long HPLAYLIST;
+typedef [export] long HPLAYLISTITEM;
+typedef [export] long EDeviceStatus;
+typedef [export] long EDBNotification;
+typedef [export] long EUnlockNotification;
+typedef [export] long EFileCopyStatus;
+
+//
+// Smart pointer typedef declarations
+//
+
+_COM_SMARTPTR_TYPEDEF(IiPodManager, __uuidof(IiPodManager));
+_COM_SMARTPTR_TYPEDEF(IiPodPreferences, __uuidof(IiPodPreferences));
+_COM_SMARTPTR_TYPEDEF(IiPodUpdater, __uuidof(IiPodUpdater));
+_COM_SMARTPTR_TYPEDEF(IiPodUser, __uuidof(IiPodUser));
+_COM_SMARTPTR_TYPEDEF(_IiPodManagerEvents, __uuidof(_IiPodManagerEvents));
+_COM_SMARTPTR_TYPEDEF(_IiPodUpdaterEvents, __uuidof(_IiPodUpdaterEvents));
+
+//
+// Type library items
+//
+
+[export] enum EFormatState
+{
+    kFormatUnknown = 0,
+    kFormatFat32 = 1,
+    kFormatMac = 2,
+    kFormatFat32NoFirmware = 3,
+    kFormatMacNoFirmware = 4
+};
+
+[export] enum _EDeviceStatus
+{
+    kDeviceStatusUnknown = 0,
+    kDeviceStatusConnected = 1,
+    kDeviceStatusMounted = 2,
+    kDeviceStatusUnmounted = 3,
+    kDeviceStatusDisconnected = 4
+};
+
+[export] enum _EDBNotification
+{
+    kDBNotifyUnknown = 0,
+    kDBNotifyDBChange = 1,
+    kDBNotifyTrackChanged = 2,
+    kDBNotifyPlaylistChanged = 3,
+    kDBNotifyPlaylistItemChanged = 4
+};
+
+[export] enum _EUnlockNotification
+{
+    kAPIUnlocked = 0,
+    kiPodUnlocked = 1,
+    kiPodServiceShutdown = 2
+};
+
+[export] enum _EFileCopyStatus
+{
+    kFileCopyInQueue = 0,
+    kFileCopyInProgress = 1,
+    kFileCopyComplete = 2,
+    kFileCopyCompleteDuplicate = 3,
+    kFileCopyCancel = 4,
+    kFileCopyError = 5
+};
+
+[export] enum EiPodState
+{
+    kUnknowniPod = 0,
+    kNewiPod = 1,
+    kConfigured = 4
+};
+
+[export] enum EAutomaticUpdateMode
+{
+    kUpdateUnknown = 0,
+    kUpdateAll = 1,
+    kUpdateSelectedPlaylists = 2
+};
+
+[export] enum EiPodDBFilter
+{
+    kDBFilterOn = 0,
+    kDBFilterOff = -1
+};
+
+[export] enum ECopyThreadStatus
+{
+    kCopyThreadStatusUnknown = -1,
+    kCopyThreadStatusWaiting = 0,
+    kCopyThreadStatusPumping = 1
+};
+
+[export] enum EIPodClass
+{
+    kIPodClassNone = 0,
+    kIPodClassV1 = 1,
+    kIPodClassV2 = 2,
+    kIPodClassV3 = 4
+};
+
+[export] enum EiPodErrors
+{
+    kErrCopyThreadBusy = -2147164159,
+    kErriPodNotMounted = -2147164059,
+    kErrAppNotRegistered = -2147164058,
+    kErrAppNotLoggedIn = -2147164057,
+    kErrAPILock = -2147164056,
+    kErriPodLock = -2147164055,
+    kErriPodHandle = -2147164054,
+    kErriPodNotLocked = -2147164053,
+    kErrWrongServiceUser = -2147164052,
+    kErrAddTrackRejected = -2147163959,
+    kErrMountUnmount = -2147163957
+};
+
+[export] enum EFormatFlags
+{
+    kFormatFlagsNone = 0,
+    kFormatFlagsOptimizeFATAlignment = 1,
+    kFormatFlagsGrowFirmwarePartition = 2
+};
+
+[export] enum ETrackOrders
+{
+    kTrackOrderInvalid = 0,
+    kTrackOrderPhysical = 1,
+    kTrackOrderShuffle = 2,
+    kTrackOrderTrackID = 3,
+    kTrackOrderName = 5,
+    kTrackOrderAlbum = 6,
+    kTrackOrderArtist = 7,
+    kTrackOrderBitRate = 8,
+    kTrackOrderGenre = 9,
+    kTrackOrderKind = 10,
+    kTrackOrderDate = 11,
+    kTrackOrderTrackNumber = 12,
+    kTrackOrderTotalSize = 13,
+    kTrackOrderTotalTime = 14,
+    kTrackOrderYear = 15,
+    kTrackOrderSampleRate = 16,
+    kTrackOrderCategory = 17,
+    kTrackOrderLocation = 18,
+    kTrackOrderComment = 20,
+    kTrackOrderDateAdded = 21,
+    kTrackOrderComposer = 23,
+    kTrackOrderNormVolume = 25,
+    kTrackOrderUserPlayCount = 26,
+    kTrackOrderPlayDate = 27,
+    kTrackOrderDiscNumber = 28,
+    kTrackOrderUserRating = 29
+};
+
+#pragma pack(push, 4)
+
+[export] struct TrackInformation
+{
+    HTRACK HTRACK;
+    long trackID;
+    BSTR trackName;
+    BSTR artist;
+    BSTR album;
+    BSTR genre;
+    BSTR kind;
+    BSTR comments;
+    BSTR composer;
+    BSTR category;
+    long totalTimeInMS;
+    long startTimeInMS;
+    long stopTimeInMS;
+    long bookmarkTimeInMS;
+    long date;
+    long sizeInBytes;
+    long sampleRate;
+    short bitRate;
+    short year;
+    short volumeAdjustment;
+    short userRating;
+    short audioFormat;
+    short trackNumber;
+    short maxTrackNumber;
+    short discNumber;
+    short maxDiscNumber;
+    long userPlayCount;
+    long recentPlayCount;
+    long playDate;
+};
+
+#pragma pack(pop)
+
+#pragma pack(push, 8)
+
+[export] struct AddTrackStatus
+{
+    enum ECopyThreadStatus status;
+    long nTracksInQueue;
+    long nTracksInQueueFromThisApp;
+    unsigned long dwIntThreadBuffSize;
+    CURRENCY liBytesToCopy;
+    CURRENCY liEstDeviceSize;
+};
+
+#pragma pack(pop)
+
+[uuid("31e3fbaf-c200-4776-9dbf-45226765cf4d"),dispinterface]
+__interface IiPodManager : IDispatch
+{
+    //
+    // Wrapper methods
+    //
+
+    // Methods:
+   [id(0x1)] void RegisterApp (
+        [in] IPODAPPID appID,
+        [in] BSTR appName,
+        [in] BSTR appPath,
+        [in] BSTR cmdLine );
+   [id(0x2)] void UnregisterApp (
+        [in] IPODAPPID appID );
+   [id(0x3)] [satype(IPODAPPID)]SAFEARRAY * GetRegisteredApps ( );
+   [id(0x4)] BSTR GetAppNameFromID (
+        [in] IPODAPPID appID );
+   [id(0x5)] IPODAPPID GetAPILockingApp ( );
+   [id(0x6)] void Login (
+        [in] IPODAPPID appID );
+   [id(0x7)] void Logout (
+        [in] IPODAPPID appID );
+   [id(0x8)] void EnableSync (
+        [in] IPODAPPID appID,
+        [in] HIPOD iPodHandle );
+   [id(0x9)] void DisableSync (
+        [in] IPODAPPID appID,
+        [in] HIPOD iPodHandle );
+   [id(0xa)] void BeginTransfer (
+        [in] IPODAPPID appID,
+        [in] HIPOD iPodHandle );
+   [id(0xb)] void EndTransfer (
+        [in] IPODAPPID appID,
+        [in] HIPOD iPodHandle );
+   [id(0xc)] void LockiPod (
+        [in] IPODAPPID appID,
+        [in] HIPOD iPodHandle );
+   [id(0xd)] void UnlockiPod (
+        [in] IPODAPPID appID,
+        [in] HIPOD iPodHandle );
+   [id(0xe)] IPODAPPID GetiPodLockingApp (
+        [in] HIPOD iPodHandle );
+   [id(0xf)] HIPOD FindFirstiPod (
+        [in] IPODAPPID appID );
+   [id(0x10)] HIPOD FindNextiPod (
+        [in] IPODAPPID appID,
+        [in] HIPOD pCuriPodHandle );
+   [id(0x11)] void Mount (
+        [in] IPODAPPID appID,
+        [in] HIPOD iPodHandle );
+   [id(0x12)] void Unmount (
+        [in] IPODAPPID appID,
+        [in] HIPOD iPodHandle );
+   [id(0x13)] long IsMounted (
+        IPODAPPID appID,
+        [in] HIPOD iPodHandle );
+   [id(0x14)] CURRENCY GetiPodFreeSpace (
+        [in] IPODAPPID appID,
+        [in] HIPOD iPodHandle );
+   [id(0x15)] CURRENCY GetDiskSize (
+        [in] IPODAPPID appID,
+        [in] HIPOD iPodHandle );
+   [id(0x16)] BSTR GetiPodDriveLetter (
+        [in] IPODAPPID appID,
+        [in] HIPOD iPodHandle,
+        [in] int format );
+   [id(0x17)] void LaunchUpdater (
+        [in] IPODAPPID callerAppID );
+   [id(0x18)] BSTR GetVersionInfo (
+        [in] IPODAPPID appID,
+        [in] HIPOD iPodHandle,
+        [out] BSTR * firmwareVersion );
+   [id(0x19)] long GetAPIVersion ( );
+   [id(0x1a)] enum EFormatState IsFormatted (
+        [in] IPODAPPID appID,
+        [in] HIPOD iPodHandle );
+   [id(0x1b)] BSTR GetVoiceNotesFolderName (
+        [in] IPODAPPID appID,
+        [in] HIPOD iPodHandle );
+   [id(0x1c)] BSTR GetDeviceUniqueID (
+        [in] IPODAPPID appID,
+        [in] HIPOD iPodHandle );
+   [id(0x1d)] void BeginTransferAsync (
+        [in] IPODAPPID appID,
+        [in] HIPOD iPodHandle );
+   [id(0x1e)] void EndTransferAsync (
+        [in] IPODAPPID appID,
+        [in] HIPOD iPodHandle );
+   [id(0x1f)] unsigned short GetFirmwareVersion (
+        [in] IPODAPPID appID,
+        [in] HIPOD iPodHandle );
+   [id(0x20)] [satype(char)]SAFEARRAY * GetCheckpointData (
+        [in] IPODAPPID appID,
+        [in] HIPOD iPodHandle );
+   [id(0x21)] void SetSupportedIPodClasses (
+        [in] IPODAPPID appID,
+        [in] enum EIPodClass supportedIPodClasses );
+   [id(0x22)] enum EIPodClass GetSupportedIPodClasses (
+        [in] IPODAPPID appID );
+};
+
+[uuid("3be5a207-40f6-4f25-bf37-27b898660b67"),dispinterface]
+__interface IiPodPreferences : IDispatch
+{
+    //
+    // Wrapper methods
+    //
+
+    // Methods:
+   [id(0x1),propget] BSTR DeviceName (
+        [in] IPODAPPID appID,
+        [in] HIPOD iPodHandle );
+   [id(0x1),propput] void DeviceName (
+        [in] IPODAPPID appID,
+        [in] HIPOD iPodHandle,
+        [in] BSTR _arg3 );
+   [id(0x2),propget] BSTR OwnerName (
+        [in] IPODAPPID appID,
+        [in] HIPOD iPodHandle );
+   [id(0x2),propput] void OwnerName (
+        [in] IPODAPPID appID,
+        [in] HIPOD iPodHandle,
+        [in] BSTR _arg3 );
+   [id(0x3),propget] BSTR HomeMachineName (
+        [in] IPODAPPID appID,
+        [in] HIPOD iPodHandle );
+   [id(0x3),propput] void HomeMachineName (
+        [in] IPODAPPID appID,
+        [in] HIPOD iPodHandle,
+        [in] BSTR _arg3 );
+   [id(0x4),propget] long FireWireDiskUse (
+        [in] IPODAPPID appID,
+        [in] HIPOD iPodHandle );
+   [id(0x4),propput] void FireWireDiskUse (
+        [in] IPODAPPID appID,
+        [in] HIPOD iPodHandle,
+        [in] long _arg3 );
+   [id(0x5),propget] long LaunchApplication (
+        [in] IPODAPPID appID,
+        [in] HIPOD iPodHandle );
+   [id(0x5),propput] void LaunchApplication (
+        [in] IPODAPPID appID,
+        [in] HIPOD iPodHandle,
+        [in] long _arg3 );
+   [id(0x6),propget] IPODAPPID HomeApplicationID (
+        [in] IPODAPPID appID,
+        [in] HIPOD iPodHandle );
+   [id(0x6),propput] void HomeApplicationID (
+        [in] IPODAPPID appID,
+        [in] HIPOD iPodHandle,
+        [in] IPODAPPID _arg3 );
+   [id(0x7),propget] long AutomaticUpdate (
+        [in] IPODAPPID appID,
+        [in] HIPOD iPodHandle );
+   [id(0x7),propput] void AutomaticUpdate (
+        [in] IPODAPPID appID,
+        [in] HIPOD iPodHandle,
+        [in] long _arg3 );
+   [id(0x8),propget] enum EAutomaticUpdateMode AutomaticUpdateMode (
+        [in] IPODAPPID appID,
+        [in] HIPOD iPodHandle );
+   [id(0x8),propput] void AutomaticUpdateMode (
+        [in] IPODAPPID appID,
+        [in] HIPOD iPodHandle,
+        [in] enum EAutomaticUpdateMode _arg3 );
+   [id(0x9),propget] CURRENCY HomeUserID (
+        [in] IPODAPPID appID,
+        [in] HIPOD iPodHandle );
+   [id(0x9),propput] void HomeUserID (
+        [in] IPODAPPID appID,
+        [in] HIPOD iPodHandle,
+        [in] CURRENCY _arg3 );
+   [id(0xa),propget] long Configured (
+        [in] IPODAPPID appID,
+        [in] HIPOD iPodHandle );
+   [id(0xa),propput] void Configured (
+        [in] IPODAPPID appID,
+        [in] HIPOD iPodHandle,
+        [in] long _arg3 );
+   [id(0xb)] void SetSessionState (
+        [in] IPODAPPID appID,
+        [in] HIPOD iPodHandle,
+        [in] enum EiPodState sessionState,
+        [in] IPODAPPID sessionHomeAppID );
+   [id(0xc)] void SetHomeMachine (
+        [in] IPODAPPID appID,
+        [in] HIPOD iPodHandle );
+   [id(0xd)] long IsItHomeMachine (
+        [in] IPODAPPID appID,
+        [in] HIPOD iPodHandle );
+};
+
+[uuid("42a63984-1154-4995-a75e-2e92f75ed902"),dispinterface]
+__interface IiPodUpdater : IDispatch
+{
+    //
+    // Wrapper methods
+    //
+
+    // Methods:
+   [id(0x1)] IPODAPPID LockAPI (
+        [in] IPODAPPID updaterID );
+   [id(0x2)] void UnlockAPI (
+        [in] IPODAPPID updaterID );
+   [id(0x3)] void U_InitUpdater ( );
+   [id(0x4)] void U_CloseUpdater ( );
+   [id(0x5)] void U_IsConnected ( );
+   [id(0x6)] void U_Mount ( );
+   [id(0x7)] void U_Open ( );
+   [id(0x8)] void U_LockIPOD ( );
+   [id(0x9)] void U_EraseSector (
+        unsigned long nSec );
+   [id(0xa)] void U_formatFAT32 (
+        unsigned long dwType,
+        unsigned long dwStart );
+   [id(0xb)] void U_WriteMBR (
+        unsigned long dwType,
+        unsigned long dwStart );
+   [id(0xc)] void U_UnlockIPOD (
+        long fDismount );
+   [id(0xd)] void U_Close ( );
+   [id(0xe)] void U_Unmount ( );
+   [id(0xf)] void U_Disconnect ( );
+   [id(0x10)] void U_GetPowerState (
+        unsigned long * pdwState );
+   [id(0x11)] void U_Write (
+        unsigned long start,
+        unsigned long cnt,
+        VARIANT * pVar );
+   [id(0x12)] void U_GetiPodCount (
+        unsigned long * pdwCount );
+   [id(0x13)] void U_GetProgressStatus (
+        unsigned long * pdwDone,
+        unsigned long * pdwTotal );
+   [id(0x14)] void U_GetDriveLetter (
+        unsigned long * pchar );
+   [id(0x15)] void U_NotifyUpdateComplete (
+        HIPOD HIPOD );
+   [id(0x16)] void U_iPodGetHWVersion (
+        unsigned long * pVersion );
+   [id(0x17)] void U_Execute (
+        unsigned long param,
+        VARIANT * pvar1,
+        VARIANT * pvar2,
+        VARIANT * pvar3,
+        VARIANT * pvar4,
+        VARIANT * pvar5,
+        VARIANT * pvar6 );
+   [id(0x18)] void U_formatFAT32Ex (
+        unsigned long dwFlags,
+        unsigned long dwType,
+        unsigned long dwStart,
+        unsigned long dwFirmwareSectors );
+   [id(0x19)] void U_WriteMBREx (
+        unsigned long dwFlags,
+        unsigned long dwType,
+        unsigned long dwStart,
+        unsigned long dwFirmwareSectors );
+};
+
+[uuid("65e1d175-369d-412f-bbbf-a5e042c220e7"),dispinterface]
+__interface IiPodUser : IDispatch
+{
+    //
+    // Wrapper methods
+    //
+
+    // Methods:
+   [id(0x1)] unsigned long RegisterUser (
+        [in] IUnknown * pUnk,
+        [in] long procID );
+   [id(0x2)] void UnregisterUser (
+        [in] unsigned long userCookie );
+   [id(0x3)] void OnDisplayiPodManagerUIEvent (
+        [in] long UIHandle,
+        [in] long SessionHomeApp,
+        [in] long sessionState,
+        [in] long UIStatus );
+};
+
+[uuid("4d56b972-8259-4833-9ab2-543962f5cf5b"),dispinterface]
+__interface _IiPodManagerEvents : IDispatch
+{
+    //
+    // Wrapper methods
+    //
+
+    // Methods:
+   [id(0x1)] int OnAddTrackStatus (
+        [in] HDB HDB,
+        [in] long queueID,
+        [in] EFileCopyStatus status,
+        [in] long param,
+        [in] VARIANT * pReserveVar );
+   [id(0x2)] void OnDBChanged (
+        [in] HDB HDB,
+        [in] IPODAPPID changingApp,
+        [in] EDBNotification notification,
+        [in] long handleToModifiedData );
+   [id(0x3)] void OniPodStatusChanged (
+        [in] HIPOD HIPOD,
+        [in] EDeviceStatus status,
+        [in] IPODAPPID homeAppID );
+   [id(0x4)] void OnLockStatusChanged (
+        [in] EUnlockNotification status,
+        [in] HIPOD HIPOD );
+   [id(0x5)] long Identify ( );
+};
+
+[uuid("7a1aad4c-a417-439c-9318-d6bdc63fa46a"),dispinterface]
+__interface _IiPodUpdaterEvents : IDispatch
+{};
+
+struct __declspec(uuid("7a7fb085-6068-4898-8cca-480a9187277c"))
+iPodManager;
+    // [ default ] interface IiPodManager
+    // interface IiPodUpdater
+    // interface IiPodPreferences
+    // interface IiPodUser
+    // [ default, source ] dispinterface _IiPodManagerEvents
+    // [ source ] dispinterface _IiPodUpdaterEvents
+
+//
+// Named GUID constants initializations
+//
+
+extern "C" const GUID __declspec(selectany) LIBID_IPODSERVICELib =
+    {0x46bc1593,0xfe6b,0x419c,{0x92,0x2d,0xaf,0x35,0x91,0xae,0xd1,0x29}};
+extern "C" const GUID __declspec(selectany) DIID_IiPodManager =
+    {0x31e3fbaf,0xc200,0x4776,{0x9d,0xbf,0x45,0x22,0x67,0x65,0xcf,0x4d}};
+extern "C" const GUID __declspec(selectany) DIID_IiPodPreferences =
+    {0x3be5a207,0x40f6,0x4f25,{0xbf,0x37,0x27,0xb8,0x98,0x66,0x0b,0x67}};
+extern "C" const GUID __declspec(selectany) DIID_IiPodUpdater =
+    {0x42a63984,0x1154,0x4995,{0xa7,0x5e,0x2e,0x92,0xf7,0x5e,0xd9,0x02}};
+extern "C" const GUID __declspec(selectany) DIID_IiPodUser =
+    {0x65e1d175,0x369d,0x412f,{0xbb,0xbf,0xa5,0xe0,0x42,0xc2,0x20,0xe7}};
+extern "C" const GUID __declspec(selectany) DIID__IiPodManagerEvents =
+    {0x4d56b972,0x8259,0x4833,{0x9a,0xb2,0x54,0x39,0x62,0xf5,0xcf,0x5b}};
+extern "C" const GUID __declspec(selectany) DIID__IiPodUpdaterEvents =
+    {0x7a1aad4c,0xa417,0x439c,{0x93,0x18,0xd6,0xbd,0xc6,0x3f,0xa4,0x6a}};
+extern "C" const GUID __declspec(selectany) CLSID_iPodManager =
+    {0x7a7fb085,0x6068,0x4898,{0x8c,0xca,0x48,0x0a,0x91,0x87,0x27,0x7c}};
+
+[ emitidl( pop ) ];

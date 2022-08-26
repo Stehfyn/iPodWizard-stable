@@ -6,7 +6,7 @@
 
 
  /* File created by MIDL compiler version 6.00.0366 */
-/* at Thu Aug 25 16:18:55 2022
+/* at Fri Aug 26 02:28:42 2022
  */
 /* Compiler settings for vc80.idl:
     Oicf, W1, Zp8, env=Win32 (32b run)

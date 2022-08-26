@@ -4,6 +4,7 @@
 	Version="8.00"
 	Name="iPodWizard"
 	ProjectGUID="{F63FD213-98B8-4736-9F77-77D18E6669AF}"
+	RootNamespace="iPodWizard"
 	Keyword="MFCProj"
 	>
 	<Platforms>
@@ -21,7 +22,7 @@
 			ConfigurationType="1"
 			InheritedPropertySheets="$(VCInstallDir)VCProjectDefaults\UpgradeFromVC71.vsprops"
 			UseOfMFC="1"
-			UseOfATL="1"
+			UseOfATL="0"
 			CharacterSet="1"
 			>
 			<Tool
@@ -68,7 +69,10 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
+				AdditionalDependencies="Credui.lib; wininet.lib; Version.lib"
 				LinkIncremental="2"
+				IgnoreAllDefaultLibraries="false"
+				IgnoreDefaultLibraryNames="LIBC;nafxcwd"
 				GenerateDebugInformation="true"
 				SubSystem="2"
 				TargetMachine="1"
@@ -150,7 +154,9 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
+				AdditionalDependencies="Credui.lib wininet.lib Version.lib"
 				LinkIncremental="1"
+				IgnoreDefaultLibraryNames="LIBC;nafxcwd"
 				GenerateDebugInformation="true"
 				SubSystem="2"
 				OptimizeReferences="2"
@@ -245,6 +251,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\LayoutDialog.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\OTFDialog.cpp"
 				>
 			</File>
@@ -305,7 +315,15 @@
 				>
 			</File>
 			<File
+				RelativePath=".\ToolTipListCtrl.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\TweaksDialog.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\UpdateCheck.cpp"
 				>
 			</File>
 			<File
@@ -379,6 +397,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\LayoutDialog.h"
+				>
+			</File>
+			<File
 				RelativePath=".\memdc.h"
 				>
 			</File>
@@ -431,7 +453,15 @@
 				>
 			</File>
 			<File
+				RelativePath=".\ToolTipListCtrl.h"
+				>
+			</File>
+			<File
 				RelativePath=".\TweaksDialog.h"
+				>
+			</File>
+			<File
+				RelativePath=".\UpdateCheck.h"
 				>
 			</File>
 			<File
@@ -477,26 +507,6 @@
 				>
 			</File>
 		</Filter>
-		<File
-			RelativePath=".\res\iPodWizard.manifest"
-			>
-			<FileConfiguration
-				Name="Debug|Win32"
-				ExcludedFromBuild="true"
-				>
-				<Tool
-					Name="VCCustomBuildTool"
-				/>
-			</FileConfiguration>
-			<FileConfiguration
-				Name="Release|Win32"
-				ExcludedFromBuild="true"
-				>
-				<Tool
-					Name="VCCustomBuildTool"
-				/>
-			</FileConfiguration>
-		</File>
 		<File
 			RelativePath=".\ReadMe.txt"
 			>

@@ -1,16 +1,16 @@
 import "docobj.idl";
 
-#line 28 "c:\\users\\xbox\\desktop\\env\\v2.1-custom\\ipodwizard-v2.x-source\\release\\ipodservice.tlh"
+#line 28 "c:\\dev\\ipodwizard-stable\\src\\release\\ipodservice.tlh"
 interface IiPodPreferences;
-#line 30 "c:\\users\\xbox\\desktop\\env\\v2.1-custom\\ipodwizard-v2.x-source\\release\\ipodservice.tlh"
+#line 30 "c:\\dev\\ipodwizard-stable\\src\\release\\ipodservice.tlh"
 interface IiPodUpdater;
-#line 32 "c:\\users\\xbox\\desktop\\env\\v2.1-custom\\ipodwizard-v2.x-source\\release\\ipodservice.tlh"
+#line 32 "c:\\dev\\ipodwizard-stable\\src\\release\\ipodservice.tlh"
 interface IiPodUser;
-#line 34 "c:\\users\\xbox\\desktop\\env\\v2.1-custom\\ipodwizard-v2.x-source\\release\\ipodservice.tlh"
+#line 34 "c:\\dev\\ipodwizard-stable\\src\\release\\ipodservice.tlh"
 interface _IiPodManagerEvents;
-#line 36 "c:\\users\\xbox\\desktop\\env\\v2.1-custom\\ipodwizard-v2.x-source\\release\\ipodservice.tlh"
+#line 36 "c:\\dev\\ipodwizard-stable\\src\\release\\ipodservice.tlh"
 interface _IiPodUpdaterEvents;
-#line 38 "c:\\users\\xbox\\desktop\\env\\v2.1-custom\\ipodwizard-v2.x-source\\release\\ipodservice.tlh"
+#line 38 "c:\\dev\\ipodwizard-stable\\src\\release\\ipodservice.tlh"
 typedef long IPODAPPID;
 
 typedef long HIPOD;
@@ -31,7 +31,7 @@ typedef long EUnlockNotification;
 
 typedef long EFileCopyStatus;
 
-#line 65 "c:\\users\\xbox\\desktop\\env\\v2.1-custom\\ipodwizard-v2.x-source\\release\\ipodservice.tlh"
+#line 65 "c:\\dev\\ipodwizard-stable\\src\\release\\ipodservice.tlh"
 enum EFormatState {
 	kFormatUnknown = 0,
 	kFormatFat32 = 1,
@@ -40,7 +40,7 @@ enum EFormatState {
 	kFormatMacNoFirmware = 4,
 };
 
-#line 74 "c:\\users\\xbox\\desktop\\env\\v2.1-custom\\ipodwizard-v2.x-source\\release\\ipodservice.tlh"
+#line 74 "c:\\dev\\ipodwizard-stable\\src\\release\\ipodservice.tlh"
 enum _EDeviceStatus {
 	kDeviceStatusUnknown = 0,
 	kDeviceStatusConnected = 1,
@@ -49,7 +49,7 @@ enum _EDeviceStatus {
 	kDeviceStatusDisconnected = 4,
 };
 
-#line 83 "c:\\users\\xbox\\desktop\\env\\v2.1-custom\\ipodwizard-v2.x-source\\release\\ipodservice.tlh"
+#line 83 "c:\\dev\\ipodwizard-stable\\src\\release\\ipodservice.tlh"
 enum _EDBNotification {
 	kDBNotifyUnknown = 0,
 	kDBNotifyDBChange = 1,
@@ -58,14 +58,14 @@ enum _EDBNotification {
 	kDBNotifyPlaylistItemChanged = 4,
 };
 
-#line 92 "c:\\users\\xbox\\desktop\\env\\v2.1-custom\\ipodwizard-v2.x-source\\release\\ipodservice.tlh"
+#line 92 "c:\\dev\\ipodwizard-stable\\src\\release\\ipodservice.tlh"
 enum _EUnlockNotification {
 	kAPIUnlocked = 0,
 	kiPodUnlocked = 1,
 	kiPodServiceShutdown = 2,
 };
 
-#line 99 "c:\\users\\xbox\\desktop\\env\\v2.1-custom\\ipodwizard-v2.x-source\\release\\ipodservice.tlh"
+#line 99 "c:\\dev\\ipodwizard-stable\\src\\release\\ipodservice.tlh"
 enum _EFileCopyStatus {
 	kFileCopyInQueue = 0,
 	kFileCopyInProgress = 1,
@@ -75,34 +75,34 @@ enum _EFileCopyStatus {
 	kFileCopyError = 5,
 };
 
-#line 109 "c:\\users\\xbox\\desktop\\env\\v2.1-custom\\ipodwizard-v2.x-source\\release\\ipodservice.tlh"
+#line 109 "c:\\dev\\ipodwizard-stable\\src\\release\\ipodservice.tlh"
 enum EiPodState {
 	kUnknowniPod = 0,
 	kNewiPod = 1,
 	kConfigured = 4,
 };
 
-#line 116 "c:\\users\\xbox\\desktop\\env\\v2.1-custom\\ipodwizard-v2.x-source\\release\\ipodservice.tlh"
+#line 116 "c:\\dev\\ipodwizard-stable\\src\\release\\ipodservice.tlh"
 enum EAutomaticUpdateMode {
 	kUpdateUnknown = 0,
 	kUpdateAll = 1,
 	kUpdateSelectedPlaylists = 2,
 };
 
-#line 123 "c:\\users\\xbox\\desktop\\env\\v2.1-custom\\ipodwizard-v2.x-source\\release\\ipodservice.tlh"
+#line 123 "c:\\dev\\ipodwizard-stable\\src\\release\\ipodservice.tlh"
 enum EiPodDBFilter {
 	kDBFilterOn = 0,
 	kDBFilterOff = -1,
 };
 
-#line 129 "c:\\users\\xbox\\desktop\\env\\v2.1-custom\\ipodwizard-v2.x-source\\release\\ipodservice.tlh"
+#line 129 "c:\\dev\\ipodwizard-stable\\src\\release\\ipodservice.tlh"
 enum ECopyThreadStatus {
 	kCopyThreadStatusUnknown = -1,
 	kCopyThreadStatusWaiting = 0,
 	kCopyThreadStatusPumping = 1,
 };
 
-#line 136 "c:\\users\\xbox\\desktop\\env\\v2.1-custom\\ipodwizard-v2.x-source\\release\\ipodservice.tlh"
+#line 136 "c:\\dev\\ipodwizard-stable\\src\\release\\ipodservice.tlh"
 enum EIPodClass {
 	kIPodClassNone = 0,
 	kIPodClassV1 = 1,
@@ -110,7 +110,7 @@ enum EIPodClass {
 	kIPodClassV3 = 4,
 };
 
-#line 144 "c:\\users\\xbox\\desktop\\env\\v2.1-custom\\ipodwizard-v2.x-source\\release\\ipodservice.tlh"
+#line 144 "c:\\dev\\ipodwizard-stable\\src\\release\\ipodservice.tlh"
 enum EiPodErrors {
 	kErrCopyThreadBusy = -2147164159,
 	kErriPodNotMounted = -2147164059,
@@ -125,14 +125,14 @@ enum EiPodErrors {
 	kErrMountUnmount = -2147163957,
 };
 
-#line 159 "c:\\users\\xbox\\desktop\\env\\v2.1-custom\\ipodwizard-v2.x-source\\release\\ipodservice.tlh"
+#line 159 "c:\\dev\\ipodwizard-stable\\src\\release\\ipodservice.tlh"
 enum EFormatFlags {
 	kFormatFlagsNone = 0,
 	kFormatFlagsOptimizeFATAlignment = 1,
 	kFormatFlagsGrowFirmwarePartition = 2,
 };
 
-#line 166 "c:\\users\\xbox\\desktop\\env\\v2.1-custom\\ipodwizard-v2.x-source\\release\\ipodservice.tlh"
+#line 166 "c:\\dev\\ipodwizard-stable\\src\\release\\ipodservice.tlh"
 enum ETrackOrders {
 	kTrackOrderInvalid = 0,
 	kTrackOrderPhysical = 1,
@@ -162,7 +162,7 @@ enum ETrackOrders {
 	kTrackOrderUserRating = 29,
 };
 
-#line 198 "c:\\users\\xbox\\desktop\\env\\v2.1-custom\\ipodwizard-v2.x-source\\release\\ipodservice.tlh"
+#line 198 "c:\\dev\\ipodwizard-stable\\src\\release\\ipodservice.tlh"
 struct TrackInformation {
 	HTRACK HTRACK;
 	long trackID;
@@ -195,7 +195,7 @@ struct TrackInformation {
 	long playDate;
 };
 
-#line 235 "c:\\users\\xbox\\desktop\\env\\v2.1-custom\\ipodwizard-v2.x-source\\release\\ipodservice.tlh"
+#line 235 "c:\\dev\\ipodwizard-stable\\src\\release\\ipodservice.tlh"
 struct AddTrackStatus {
 	enum ECopyThreadStatus status;
 	long nTracksInQueue;
@@ -215,147 +215,147 @@ library iPodEventReceiver
 	[
 		uuid(31e3fbaf-c200-4776-9dbf-45226765cf4d)
 	] 
-#line 247 "c:\\users\\xbox\\desktop\\env\\v2.1-custom\\ipodwizard-v2.x-source\\release\\ipodservice.tlh"
+#line 247 "c:\\dev\\ipodwizard-stable\\src\\release\\ipodservice.tlh"
 	dispinterface IiPodManager {
 	properties:
 
 	methods:
-#line 254 "c:\\users\\xbox\\desktop\\env\\v2.1-custom\\ipodwizard-v2.x-source\\release\\ipodservice.tlh"
+#line 254 "c:\\dev\\ipodwizard-stable\\src\\release\\ipodservice.tlh"
 		[id(1)] void  RegisterApp([in] IPODAPPID appID, [in] BSTR appName, [in] BSTR appPath, [in] BSTR cmdLine);
-#line 259 "c:\\users\\xbox\\desktop\\env\\v2.1-custom\\ipodwizard-v2.x-source\\release\\ipodservice.tlh"
+#line 259 "c:\\dev\\ipodwizard-stable\\src\\release\\ipodservice.tlh"
 		[id(2)] void  UnregisterApp([in] IPODAPPID appID);
-#line 261 "c:\\users\\xbox\\desktop\\env\\v2.1-custom\\ipodwizard-v2.x-source\\release\\ipodservice.tlh"
+#line 261 "c:\\dev\\ipodwizard-stable\\src\\release\\ipodservice.tlh"
 		[id(3)] SAFEARRAY *  GetRegisteredApps();
 		[id(4)] BSTR  GetAppNameFromID([in] IPODAPPID appID);
-#line 264 "c:\\users\\xbox\\desktop\\env\\v2.1-custom\\ipodwizard-v2.x-source\\release\\ipodservice.tlh"
+#line 264 "c:\\dev\\ipodwizard-stable\\src\\release\\ipodservice.tlh"
 		[id(5)] IPODAPPID  GetAPILockingApp();
 		[id(6)] void  Login([in] IPODAPPID appID);
-#line 267 "c:\\users\\xbox\\desktop\\env\\v2.1-custom\\ipodwizard-v2.x-source\\release\\ipodservice.tlh"
+#line 267 "c:\\dev\\ipodwizard-stable\\src\\release\\ipodservice.tlh"
 		[id(7)] void  Logout([in] IPODAPPID appID);
-#line 269 "c:\\users\\xbox\\desktop\\env\\v2.1-custom\\ipodwizard-v2.x-source\\release\\ipodservice.tlh"
+#line 269 "c:\\dev\\ipodwizard-stable\\src\\release\\ipodservice.tlh"
 		[id(8)] void  EnableSync([in] IPODAPPID appID, [in] HIPOD iPodHandle);
-#line 272 "c:\\users\\xbox\\desktop\\env\\v2.1-custom\\ipodwizard-v2.x-source\\release\\ipodservice.tlh"
+#line 272 "c:\\dev\\ipodwizard-stable\\src\\release\\ipodservice.tlh"
 		[id(9)] void  DisableSync([in] IPODAPPID appID, [in] HIPOD iPodHandle);
-#line 275 "c:\\users\\xbox\\desktop\\env\\v2.1-custom\\ipodwizard-v2.x-source\\release\\ipodservice.tlh"
+#line 275 "c:\\dev\\ipodwizard-stable\\src\\release\\ipodservice.tlh"
 		[id(10)] void  BeginTransfer([in] IPODAPPID appID, [in] HIPOD iPodHandle);
-#line 278 "c:\\users\\xbox\\desktop\\env\\v2.1-custom\\ipodwizard-v2.x-source\\release\\ipodservice.tlh"
+#line 278 "c:\\dev\\ipodwizard-stable\\src\\release\\ipodservice.tlh"
 		[id(11)] void  EndTransfer([in] IPODAPPID appID, [in] HIPOD iPodHandle);
-#line 281 "c:\\users\\xbox\\desktop\\env\\v2.1-custom\\ipodwizard-v2.x-source\\release\\ipodservice.tlh"
+#line 281 "c:\\dev\\ipodwizard-stable\\src\\release\\ipodservice.tlh"
 		[id(12)] void  LockiPod([in] IPODAPPID appID, [in] HIPOD iPodHandle);
-#line 284 "c:\\users\\xbox\\desktop\\env\\v2.1-custom\\ipodwizard-v2.x-source\\release\\ipodservice.tlh"
+#line 284 "c:\\dev\\ipodwizard-stable\\src\\release\\ipodservice.tlh"
 		[id(13)] void  UnlockiPod([in] IPODAPPID appID, [in] HIPOD iPodHandle);
-#line 287 "c:\\users\\xbox\\desktop\\env\\v2.1-custom\\ipodwizard-v2.x-source\\release\\ipodservice.tlh"
+#line 287 "c:\\dev\\ipodwizard-stable\\src\\release\\ipodservice.tlh"
 		[id(14)] IPODAPPID  GetiPodLockingApp([in] HIPOD iPodHandle);
-#line 289 "c:\\users\\xbox\\desktop\\env\\v2.1-custom\\ipodwizard-v2.x-source\\release\\ipodservice.tlh"
+#line 289 "c:\\dev\\ipodwizard-stable\\src\\release\\ipodservice.tlh"
 		[id(15)] HIPOD  FindFirstiPod([in] IPODAPPID appID);
-#line 291 "c:\\users\\xbox\\desktop\\env\\v2.1-custom\\ipodwizard-v2.x-source\\release\\ipodservice.tlh"
+#line 291 "c:\\dev\\ipodwizard-stable\\src\\release\\ipodservice.tlh"
 		[id(16)] HIPOD  FindNextiPod([in] IPODAPPID appID, [in] HIPOD pCuriPodHandle);
-#line 294 "c:\\users\\xbox\\desktop\\env\\v2.1-custom\\ipodwizard-v2.x-source\\release\\ipodservice.tlh"
+#line 294 "c:\\dev\\ipodwizard-stable\\src\\release\\ipodservice.tlh"
 		[id(17)] void  Mount([in] IPODAPPID appID, [in] HIPOD iPodHandle);
-#line 297 "c:\\users\\xbox\\desktop\\env\\v2.1-custom\\ipodwizard-v2.x-source\\release\\ipodservice.tlh"
+#line 297 "c:\\dev\\ipodwizard-stable\\src\\release\\ipodservice.tlh"
 		[id(18)] void  Unmount([in] IPODAPPID appID, [in] HIPOD iPodHandle);
-#line 300 "c:\\users\\xbox\\desktop\\env\\v2.1-custom\\ipodwizard-v2.x-source\\release\\ipodservice.tlh"
+#line 300 "c:\\dev\\ipodwizard-stable\\src\\release\\ipodservice.tlh"
 		[id(19)] long  IsMounted([in]IPODAPPID appID, [in] HIPOD iPodHandle);
-#line 303 "c:\\users\\xbox\\desktop\\env\\v2.1-custom\\ipodwizard-v2.x-source\\release\\ipodservice.tlh"
+#line 303 "c:\\dev\\ipodwizard-stable\\src\\release\\ipodservice.tlh"
 		[id(20)] CURRENCY  GetiPodFreeSpace([in] IPODAPPID appID, [in] HIPOD iPodHandle);
-#line 306 "c:\\users\\xbox\\desktop\\env\\v2.1-custom\\ipodwizard-v2.x-source\\release\\ipodservice.tlh"
+#line 306 "c:\\dev\\ipodwizard-stable\\src\\release\\ipodservice.tlh"
 		[id(21)] CURRENCY  GetDiskSize([in] IPODAPPID appID, [in] HIPOD iPodHandle);
-#line 309 "c:\\users\\xbox\\desktop\\env\\v2.1-custom\\ipodwizard-v2.x-source\\release\\ipodservice.tlh"
+#line 309 "c:\\dev\\ipodwizard-stable\\src\\release\\ipodservice.tlh"
 		[id(22)] BSTR  GetiPodDriveLetter([in] IPODAPPID appID, [in] HIPOD iPodHandle, [in] int format);
-#line 313 "c:\\users\\xbox\\desktop\\env\\v2.1-custom\\ipodwizard-v2.x-source\\release\\ipodservice.tlh"
+#line 313 "c:\\dev\\ipodwizard-stable\\src\\release\\ipodservice.tlh"
 		[id(23)] void  LaunchUpdater([in] IPODAPPID callerAppID);
-#line 315 "c:\\users\\xbox\\desktop\\env\\v2.1-custom\\ipodwizard-v2.x-source\\release\\ipodservice.tlh"
+#line 315 "c:\\dev\\ipodwizard-stable\\src\\release\\ipodservice.tlh"
 		[id(24)] BSTR  GetVersionInfo([in] IPODAPPID appID, [in] HIPOD iPodHandle, [out] BSTR *firmwareVersion);
-#line 319 "c:\\users\\xbox\\desktop\\env\\v2.1-custom\\ipodwizard-v2.x-source\\release\\ipodservice.tlh"
+#line 319 "c:\\dev\\ipodwizard-stable\\src\\release\\ipodservice.tlh"
 		[id(25)] long  GetAPIVersion();
 		[id(26)] enum EFormatState  IsFormatted([in] IPODAPPID appID, [in] HIPOD iPodHandle);
-#line 323 "c:\\users\\xbox\\desktop\\env\\v2.1-custom\\ipodwizard-v2.x-source\\release\\ipodservice.tlh"
+#line 323 "c:\\dev\\ipodwizard-stable\\src\\release\\ipodservice.tlh"
 		[id(27)] BSTR  GetVoiceNotesFolderName([in] IPODAPPID appID, [in] HIPOD iPodHandle);
-#line 326 "c:\\users\\xbox\\desktop\\env\\v2.1-custom\\ipodwizard-v2.x-source\\release\\ipodservice.tlh"
+#line 326 "c:\\dev\\ipodwizard-stable\\src\\release\\ipodservice.tlh"
 		[id(28)] BSTR  GetDeviceUniqueID([in] IPODAPPID appID, [in] HIPOD iPodHandle);
-#line 329 "c:\\users\\xbox\\desktop\\env\\v2.1-custom\\ipodwizard-v2.x-source\\release\\ipodservice.tlh"
+#line 329 "c:\\dev\\ipodwizard-stable\\src\\release\\ipodservice.tlh"
 		[id(29)] void  BeginTransferAsync([in] IPODAPPID appID, [in] HIPOD iPodHandle);
-#line 332 "c:\\users\\xbox\\desktop\\env\\v2.1-custom\\ipodwizard-v2.x-source\\release\\ipodservice.tlh"
+#line 332 "c:\\dev\\ipodwizard-stable\\src\\release\\ipodservice.tlh"
 		[id(30)] void  EndTransferAsync([in] IPODAPPID appID, [in] HIPOD iPodHandle);
-#line 335 "c:\\users\\xbox\\desktop\\env\\v2.1-custom\\ipodwizard-v2.x-source\\release\\ipodservice.tlh"
+#line 335 "c:\\dev\\ipodwizard-stable\\src\\release\\ipodservice.tlh"
 		[id(31)] unsigned short  GetFirmwareVersion([in] IPODAPPID appID, [in] HIPOD iPodHandle);
-#line 338 "c:\\users\\xbox\\desktop\\env\\v2.1-custom\\ipodwizard-v2.x-source\\release\\ipodservice.tlh"
+#line 338 "c:\\dev\\ipodwizard-stable\\src\\release\\ipodservice.tlh"
 		[id(32)] SAFEARRAY(IPODAPPID)   GetCheckpointData([in] IPODAPPID appID, [in] HIPOD iPodHandle);
-#line 341 "c:\\users\\xbox\\desktop\\env\\v2.1-custom\\ipodwizard-v2.x-source\\release\\ipodservice.tlh"
+#line 341 "c:\\dev\\ipodwizard-stable\\src\\release\\ipodservice.tlh"
 		[id(33)] void  SetSupportedIPodClasses([in] IPODAPPID appID, [in] enum EIPodClass supportedIPodClasses);
-#line 344 "c:\\users\\xbox\\desktop\\env\\v2.1-custom\\ipodwizard-v2.x-source\\release\\ipodservice.tlh"
+#line 344 "c:\\dev\\ipodwizard-stable\\src\\release\\ipodservice.tlh"
 		[id(34)] enum EIPodClass  GetSupportedIPodClasses([in] IPODAPPID appID);
 	};
 
 	[
 		uuid(3be5a207-40f6-4f25-bf37-27b898660b67)
 	] 
-#line 349 "c:\\users\\xbox\\desktop\\env\\v2.1-custom\\ipodwizard-v2.x-source\\release\\ipodservice.tlh"
+#line 349 "c:\\dev\\ipodwizard-stable\\src\\release\\ipodservice.tlh"
 	dispinterface IiPodPreferences {
 	properties:
 
 	methods:
-#line 356 "c:\\users\\xbox\\desktop\\env\\v2.1-custom\\ipodwizard-v2.x-source\\release\\ipodservice.tlh"
+#line 356 "c:\\dev\\ipodwizard-stable\\src\\release\\ipodservice.tlh"
 		[propget,id(1)] BSTR  DeviceName([in] IPODAPPID appID, [in] HIPOD iPodHandle);
-#line 359 "c:\\users\\xbox\\desktop\\env\\v2.1-custom\\ipodwizard-v2.x-source\\release\\ipodservice.tlh"
+#line 359 "c:\\dev\\ipodwizard-stable\\src\\release\\ipodservice.tlh"
 		[propput,id(1)] void  DeviceName([in] IPODAPPID appID, [in] HIPOD iPodHandle, [in] BSTR _arg3);
-#line 363 "c:\\users\\xbox\\desktop\\env\\v2.1-custom\\ipodwizard-v2.x-source\\release\\ipodservice.tlh"
+#line 363 "c:\\dev\\ipodwizard-stable\\src\\release\\ipodservice.tlh"
 		[propget,id(2)] BSTR  OwnerName([in] IPODAPPID appID, [in] HIPOD iPodHandle);
-#line 366 "c:\\users\\xbox\\desktop\\env\\v2.1-custom\\ipodwizard-v2.x-source\\release\\ipodservice.tlh"
+#line 366 "c:\\dev\\ipodwizard-stable\\src\\release\\ipodservice.tlh"
 		[propput,id(2)] void  OwnerName([in] IPODAPPID appID, [in] HIPOD iPodHandle, [in] BSTR _arg3);
-#line 370 "c:\\users\\xbox\\desktop\\env\\v2.1-custom\\ipodwizard-v2.x-source\\release\\ipodservice.tlh"
+#line 370 "c:\\dev\\ipodwizard-stable\\src\\release\\ipodservice.tlh"
 		[propget,id(3)] BSTR  HomeMachineName([in] IPODAPPID appID, [in] HIPOD iPodHandle);
-#line 373 "c:\\users\\xbox\\desktop\\env\\v2.1-custom\\ipodwizard-v2.x-source\\release\\ipodservice.tlh"
+#line 373 "c:\\dev\\ipodwizard-stable\\src\\release\\ipodservice.tlh"
 		[propput,id(3)] void  HomeMachineName([in] IPODAPPID appID, [in] HIPOD iPodHandle, [in] BSTR _arg3);
-#line 377 "c:\\users\\xbox\\desktop\\env\\v2.1-custom\\ipodwizard-v2.x-source\\release\\ipodservice.tlh"
+#line 377 "c:\\dev\\ipodwizard-stable\\src\\release\\ipodservice.tlh"
 		[propget,id(4)] long  FireWireDiskUse([in] IPODAPPID appID, [in] HIPOD iPodHandle);
-#line 380 "c:\\users\\xbox\\desktop\\env\\v2.1-custom\\ipodwizard-v2.x-source\\release\\ipodservice.tlh"
+#line 380 "c:\\dev\\ipodwizard-stable\\src\\release\\ipodservice.tlh"
 		[propput,id(4)] void  FireWireDiskUse([in] IPODAPPID appID, [in] HIPOD iPodHandle, [in] long _arg3);
-#line 384 "c:\\users\\xbox\\desktop\\env\\v2.1-custom\\ipodwizard-v2.x-source\\release\\ipodservice.tlh"
+#line 384 "c:\\dev\\ipodwizard-stable\\src\\release\\ipodservice.tlh"
 		[propget,id(5)] long  LaunchApplication([in] IPODAPPID appID, [in] HIPOD iPodHandle);
-#line 387 "c:\\users\\xbox\\desktop\\env\\v2.1-custom\\ipodwizard-v2.x-source\\release\\ipodservice.tlh"
+#line 387 "c:\\dev\\ipodwizard-stable\\src\\release\\ipodservice.tlh"
 		[propput,id(5)] void  LaunchApplication([in] IPODAPPID appID, [in] HIPOD iPodHandle, [in] long _arg3);
-#line 391 "c:\\users\\xbox\\desktop\\env\\v2.1-custom\\ipodwizard-v2.x-source\\release\\ipodservice.tlh"
+#line 391 "c:\\dev\\ipodwizard-stable\\src\\release\\ipodservice.tlh"
 		[propget,id(6)] IPODAPPID  HomeApplicationID([in] IPODAPPID appID, [in] HIPOD iPodHandle);
-#line 394 "c:\\users\\xbox\\desktop\\env\\v2.1-custom\\ipodwizard-v2.x-source\\release\\ipodservice.tlh"
+#line 394 "c:\\dev\\ipodwizard-stable\\src\\release\\ipodservice.tlh"
 		[propput,id(6)] void  HomeApplicationID([in] IPODAPPID appID, [in] HIPOD iPodHandle, [in] IPODAPPID _arg3);
-#line 398 "c:\\users\\xbox\\desktop\\env\\v2.1-custom\\ipodwizard-v2.x-source\\release\\ipodservice.tlh"
+#line 398 "c:\\dev\\ipodwizard-stable\\src\\release\\ipodservice.tlh"
 		[propget,id(7)] long  AutomaticUpdate([in] IPODAPPID appID, [in] HIPOD iPodHandle);
-#line 401 "c:\\users\\xbox\\desktop\\env\\v2.1-custom\\ipodwizard-v2.x-source\\release\\ipodservice.tlh"
+#line 401 "c:\\dev\\ipodwizard-stable\\src\\release\\ipodservice.tlh"
 		[propput,id(7)] void  AutomaticUpdate([in] IPODAPPID appID, [in] HIPOD iPodHandle, [in] long _arg3);
-#line 405 "c:\\users\\xbox\\desktop\\env\\v2.1-custom\\ipodwizard-v2.x-source\\release\\ipodservice.tlh"
+#line 405 "c:\\dev\\ipodwizard-stable\\src\\release\\ipodservice.tlh"
 		[propget,id(8)] enum EAutomaticUpdateMode  AutomaticUpdateMode([in] IPODAPPID appID, [in] HIPOD iPodHandle);
-#line 408 "c:\\users\\xbox\\desktop\\env\\v2.1-custom\\ipodwizard-v2.x-source\\release\\ipodservice.tlh"
+#line 408 "c:\\dev\\ipodwizard-stable\\src\\release\\ipodservice.tlh"
 		[propput,id(8)] void  AutomaticUpdateMode([in] IPODAPPID appID, [in] HIPOD iPodHandle, [in] enum EAutomaticUpdateMode _arg3);
-#line 412 "c:\\users\\xbox\\desktop\\env\\v2.1-custom\\ipodwizard-v2.x-source\\release\\ipodservice.tlh"
+#line 412 "c:\\dev\\ipodwizard-stable\\src\\release\\ipodservice.tlh"
 		[propget,id(9)] CURRENCY  HomeUserID([in] IPODAPPID appID, [in] HIPOD iPodHandle);
-#line 415 "c:\\users\\xbox\\desktop\\env\\v2.1-custom\\ipodwizard-v2.x-source\\release\\ipodservice.tlh"
+#line 415 "c:\\dev\\ipodwizard-stable\\src\\release\\ipodservice.tlh"
 		[propput,id(9)] void  HomeUserID([in] IPODAPPID appID, [in] HIPOD iPodHandle, [in] CURRENCY _arg3);
-#line 419 "c:\\users\\xbox\\desktop\\env\\v2.1-custom\\ipodwizard-v2.x-source\\release\\ipodservice.tlh"
+#line 419 "c:\\dev\\ipodwizard-stable\\src\\release\\ipodservice.tlh"
 		[propget,id(10)] long  Configured([in] IPODAPPID appID, [in] HIPOD iPodHandle);
-#line 422 "c:\\users\\xbox\\desktop\\env\\v2.1-custom\\ipodwizard-v2.x-source\\release\\ipodservice.tlh"
+#line 422 "c:\\dev\\ipodwizard-stable\\src\\release\\ipodservice.tlh"
 		[propput,id(10)] void  Configured([in] IPODAPPID appID, [in] HIPOD iPodHandle, [in] long _arg3);
-#line 426 "c:\\users\\xbox\\desktop\\env\\v2.1-custom\\ipodwizard-v2.x-source\\release\\ipodservice.tlh"
+#line 426 "c:\\dev\\ipodwizard-stable\\src\\release\\ipodservice.tlh"
 		[id(11)] void  SetSessionState([in] IPODAPPID appID, [in] HIPOD iPodHandle, [in] enum EiPodState sessionState, [in] IPODAPPID sessionHomeAppID);
-#line 431 "c:\\users\\xbox\\desktop\\env\\v2.1-custom\\ipodwizard-v2.x-source\\release\\ipodservice.tlh"
+#line 431 "c:\\dev\\ipodwizard-stable\\src\\release\\ipodservice.tlh"
 		[id(12)] void  SetHomeMachine([in] IPODAPPID appID, [in] HIPOD iPodHandle);
-#line 434 "c:\\users\\xbox\\desktop\\env\\v2.1-custom\\ipodwizard-v2.x-source\\release\\ipodservice.tlh"
+#line 434 "c:\\dev\\ipodwizard-stable\\src\\release\\ipodservice.tlh"
 		[id(13)] long  IsItHomeMachine([in] IPODAPPID appID, [in] HIPOD iPodHandle);
 	};
 
 	[
 		uuid(42a63984-1154-4995-a75e-2e92f75ed902)
 	] 
-#line 440 "c:\\users\\xbox\\desktop\\env\\v2.1-custom\\ipodwizard-v2.x-source\\release\\ipodservice.tlh"
+#line 440 "c:\\dev\\ipodwizard-stable\\src\\release\\ipodservice.tlh"
 	dispinterface IiPodUpdater {
 	properties:
 
 	methods:
-#line 447 "c:\\users\\xbox\\desktop\\env\\v2.1-custom\\ipodwizard-v2.x-source\\release\\ipodservice.tlh"
+#line 447 "c:\\dev\\ipodwizard-stable\\src\\release\\ipodservice.tlh"
 		[id(1)] IPODAPPID  LockAPI([in] IPODAPPID updaterID);
-#line 449 "c:\\users\\xbox\\desktop\\env\\v2.1-custom\\ipodwizard-v2.x-source\\release\\ipodservice.tlh"
+#line 449 "c:\\dev\\ipodwizard-stable\\src\\release\\ipodservice.tlh"
 		[id(2)] void  UnlockAPI([in] IPODAPPID updaterID);
-#line 451 "c:\\users\\xbox\\desktop\\env\\v2.1-custom\\ipodwizard-v2.x-source\\release\\ipodservice.tlh"
+#line 451 "c:\\dev\\ipodwizard-stable\\src\\release\\ipodservice.tlh"
 		[id(3)] void  U_InitUpdater();
 		[id(4)] void  U_CloseUpdater();
 		[id(5)] void  U_IsConnected();
@@ -363,77 +363,77 @@ library iPodEventReceiver
 		[id(7)] void  U_Open();
 		[id(8)] void  U_LockIPOD();
 		[id(9)] void  U_EraseSector([in]unsigned long nSec);
-#line 459 "c:\\users\\xbox\\desktop\\env\\v2.1-custom\\ipodwizard-v2.x-source\\release\\ipodservice.tlh"
+#line 459 "c:\\dev\\ipodwizard-stable\\src\\release\\ipodservice.tlh"
 		[id(10)] void  U_formatFAT32([in]unsigned long dwType, [in]unsigned long dwStart);
-#line 462 "c:\\users\\xbox\\desktop\\env\\v2.1-custom\\ipodwizard-v2.x-source\\release\\ipodservice.tlh"
+#line 462 "c:\\dev\\ipodwizard-stable\\src\\release\\ipodservice.tlh"
 		[id(11)] void  U_WriteMBR([in]unsigned long dwType, [in]unsigned long dwStart);
-#line 465 "c:\\users\\xbox\\desktop\\env\\v2.1-custom\\ipodwizard-v2.x-source\\release\\ipodservice.tlh"
+#line 465 "c:\\dev\\ipodwizard-stable\\src\\release\\ipodservice.tlh"
 		[id(12)] void  U_UnlockIPOD([in]long fDismount);
-#line 467 "c:\\users\\xbox\\desktop\\env\\v2.1-custom\\ipodwizard-v2.x-source\\release\\ipodservice.tlh"
+#line 467 "c:\\dev\\ipodwizard-stable\\src\\release\\ipodservice.tlh"
 		[id(13)] void  U_Close();
 		[id(14)] void  U_Unmount();
 		[id(15)] void  U_Disconnect();
 		[id(16)] void  U_GetPowerState([in]unsigned long *pdwState);
-#line 472 "c:\\users\\xbox\\desktop\\env\\v2.1-custom\\ipodwizard-v2.x-source\\release\\ipodservice.tlh"
+#line 472 "c:\\dev\\ipodwizard-stable\\src\\release\\ipodservice.tlh"
 		[id(17)] void  U_Write([in]unsigned long start, [in]unsigned long cnt, [in]VARIANT *pVar);
-#line 476 "c:\\users\\xbox\\desktop\\env\\v2.1-custom\\ipodwizard-v2.x-source\\release\\ipodservice.tlh"
+#line 476 "c:\\dev\\ipodwizard-stable\\src\\release\\ipodservice.tlh"
 		[id(18)] void  U_GetiPodCount([in]unsigned long *pdwCount);
-#line 478 "c:\\users\\xbox\\desktop\\env\\v2.1-custom\\ipodwizard-v2.x-source\\release\\ipodservice.tlh"
+#line 478 "c:\\dev\\ipodwizard-stable\\src\\release\\ipodservice.tlh"
 		[id(19)] void  U_GetProgressStatus([in]unsigned long *pdwDone, [in]unsigned long *pdwTotal);
-#line 481 "c:\\users\\xbox\\desktop\\env\\v2.1-custom\\ipodwizard-v2.x-source\\release\\ipodservice.tlh"
+#line 481 "c:\\dev\\ipodwizard-stable\\src\\release\\ipodservice.tlh"
 		[id(20)] void  U_GetDriveLetter([in]unsigned long *pchar);
-#line 483 "c:\\users\\xbox\\desktop\\env\\v2.1-custom\\ipodwizard-v2.x-source\\release\\ipodservice.tlh"
+#line 483 "c:\\dev\\ipodwizard-stable\\src\\release\\ipodservice.tlh"
 		[id(21)] void  U_NotifyUpdateComplete([in]HIPOD HIPOD);
-#line 485 "c:\\users\\xbox\\desktop\\env\\v2.1-custom\\ipodwizard-v2.x-source\\release\\ipodservice.tlh"
+#line 485 "c:\\dev\\ipodwizard-stable\\src\\release\\ipodservice.tlh"
 		[id(22)] void  U_iPodGetHWVersion([in]unsigned long *pVersion);
-#line 487 "c:\\users\\xbox\\desktop\\env\\v2.1-custom\\ipodwizard-v2.x-source\\release\\ipodservice.tlh"
+#line 487 "c:\\dev\\ipodwizard-stable\\src\\release\\ipodservice.tlh"
 		[id(23)] void  U_Execute([in]unsigned long param, [in]VARIANT *pvar1, [in]VARIANT *pvar2, [in]VARIANT *pvar3, [in]VARIANT *pvar4, [in]VARIANT *pvar5, [in]VARIANT *pvar6);
-#line 495 "c:\\users\\xbox\\desktop\\env\\v2.1-custom\\ipodwizard-v2.x-source\\release\\ipodservice.tlh"
+#line 495 "c:\\dev\\ipodwizard-stable\\src\\release\\ipodservice.tlh"
 		[id(24)] void  U_formatFAT32Ex([in]unsigned long dwFlags, [in]unsigned long dwType, [in]unsigned long dwStart, [in]unsigned long dwFirmwareSectors);
-#line 500 "c:\\users\\xbox\\desktop\\env\\v2.1-custom\\ipodwizard-v2.x-source\\release\\ipodservice.tlh"
+#line 500 "c:\\dev\\ipodwizard-stable\\src\\release\\ipodservice.tlh"
 		[id(25)] void  U_WriteMBREx([in]unsigned long dwFlags, [in]unsigned long dwType, [in]unsigned long dwStart, [in]unsigned long dwFirmwareSectors);
 	};
 
 	[
 		uuid(65e1d175-369d-412f-bbbf-a5e042c220e7)
 	] 
-#line 508 "c:\\users\\xbox\\desktop\\env\\v2.1-custom\\ipodwizard-v2.x-source\\release\\ipodservice.tlh"
+#line 508 "c:\\dev\\ipodwizard-stable\\src\\release\\ipodservice.tlh"
 	dispinterface IiPodUser {
 	properties:
 
 	methods:
-#line 515 "c:\\users\\xbox\\desktop\\env\\v2.1-custom\\ipodwizard-v2.x-source\\release\\ipodservice.tlh"
+#line 515 "c:\\dev\\ipodwizard-stable\\src\\release\\ipodservice.tlh"
 		[id(1)] unsigned long  RegisterUser([in] IUnknown *pUnk, [in] long procID);
-#line 518 "c:\\users\\xbox\\desktop\\env\\v2.1-custom\\ipodwizard-v2.x-source\\release\\ipodservice.tlh"
+#line 518 "c:\\dev\\ipodwizard-stable\\src\\release\\ipodservice.tlh"
 		[id(2)] void  UnregisterUser([in] unsigned long userCookie);
-#line 520 "c:\\users\\xbox\\desktop\\env\\v2.1-custom\\ipodwizard-v2.x-source\\release\\ipodservice.tlh"
+#line 520 "c:\\dev\\ipodwizard-stable\\src\\release\\ipodservice.tlh"
 		[id(3)] void  OnDisplayiPodManagerUIEvent([in] long UIHandle, [in] long SessionHomeApp, [in] long sessionState, [in] long UIStatus);
 	};
 
 	[
 		uuid(4d56b972-8259-4833-9ab2-543962f5cf5b)
 	] 
-#line 528 "c:\\users\\xbox\\desktop\\env\\v2.1-custom\\ipodwizard-v2.x-source\\release\\ipodservice.tlh"
+#line 528 "c:\\dev\\ipodwizard-stable\\src\\release\\ipodservice.tlh"
 	dispinterface _IiPodManagerEvents {
 	properties:
 
 	methods:
-#line 535 "c:\\users\\xbox\\desktop\\env\\v2.1-custom\\ipodwizard-v2.x-source\\release\\ipodservice.tlh"
+#line 535 "c:\\dev\\ipodwizard-stable\\src\\release\\ipodservice.tlh"
 		[id(1)] int  OnAddTrackStatus([in] HDB HDB, [in] long queueID, [in] EFileCopyStatus status, [in] long param, [in] VARIANT *pReserveVar);
-#line 541 "c:\\users\\xbox\\desktop\\env\\v2.1-custom\\ipodwizard-v2.x-source\\release\\ipodservice.tlh"
+#line 541 "c:\\dev\\ipodwizard-stable\\src\\release\\ipodservice.tlh"
 		[id(2)] void  OnDBChanged([in] HDB HDB, [in] IPODAPPID changingApp, [in] EDBNotification notification, [in] long handleToModifiedData);
-#line 546 "c:\\users\\xbox\\desktop\\env\\v2.1-custom\\ipodwizard-v2.x-source\\release\\ipodservice.tlh"
+#line 546 "c:\\dev\\ipodwizard-stable\\src\\release\\ipodservice.tlh"
 		[id(3)] void  OniPodStatusChanged([in] HIPOD HIPOD, [in] EDeviceStatus status, [in] IPODAPPID homeAppID);
-#line 550 "c:\\users\\xbox\\desktop\\env\\v2.1-custom\\ipodwizard-v2.x-source\\release\\ipodservice.tlh"
+#line 550 "c:\\dev\\ipodwizard-stable\\src\\release\\ipodservice.tlh"
 		[id(4)] void  OnLockStatusChanged([in] EUnlockNotification status, [in] HIPOD HIPOD);
-#line 553 "c:\\users\\xbox\\desktop\\env\\v2.1-custom\\ipodwizard-v2.x-source\\release\\ipodservice.tlh"
+#line 553 "c:\\dev\\ipodwizard-stable\\src\\release\\ipodservice.tlh"
 		[id(5)] long  Identify();
 	};
 
 	[
 		uuid(7a1aad4c-a417-439c-9318-d6bdc63fa46a)
 	] 
-#line 557 "c:\\users\\xbox\\desktop\\env\\v2.1-custom\\ipodwizard-v2.x-source\\release\\ipodservice.tlh"
+#line 557 "c:\\dev\\ipodwizard-stable\\src\\release\\ipodservice.tlh"
 	dispinterface _IiPodUpdaterEvents {
 	properties:
 

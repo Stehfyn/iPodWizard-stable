@@ -48,3 +48,20 @@
 
 #define ARRSIZE(x)	(sizeof(x)/sizeof(x[0]))
 
+static char *Unicode2MB(CString& sinput)
+{
+	LPTSTR lpszInput=sinput.GetBuffer( sinput.GetLength() );
+	int nLen=WideCharToMultiByte(CP_ACP, 0, (LPCWSTR)lpszInput, -1, NULL, NULL, NULL, NULL);
+	char *snuser=new char[nLen*2];
+	WideCharToMultiByte(CP_ACP, 0, (LPCWSTR)lpszInput, -1, snuser, nLen, NULL, NULL);
+	sinput.ReleaseBuffer();
+	return snuser;
+}
+
+static LPCTSTR MB2Unicode(char *input)
+{
+	int nLen=MultiByteToWideChar(CP_ACP, 0, input, -1, NULL, NULL);
+	LPWSTR lpwStr=new WCHAR[nLen*2];
+	MultiByteToWideChar(CP_ACP, 0, input, -1, lpwStr, nLen);
+	return (LPCTSTR)lpwStr;
+}

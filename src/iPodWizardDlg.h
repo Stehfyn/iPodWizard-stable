@@ -10,9 +10,8 @@
 #include "UpdaterDialog.h"
 #include "afxwin.h"
 #include "afxcmn.h"
-
 #include "DialogMinHelpBtn.h"
-
+//#include "iPod
 
 // CiPodWizardDlg dialog
 //class CiPodWizardDlg : public CDialog

@@ -247,7 +247,7 @@ BOOL COTFDialog::OnInitDialog()
 	// EXCEPTION: OCX Property Pages should return FALSE
 }
 
-void COTFDialog::SetFirmware(CFirmware *pFirmware)
+void COTFDialog::SetFirmware(CFirmware *pFirmware, CLayoutDialog *pLayoutDialog)
 {
 	m_pFirmware = pFirmware;
 
