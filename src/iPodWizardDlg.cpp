@@ -810,7 +810,7 @@ void CiPodWizardDlg::OnBnClickedLoadFirmware()
 	dlg.DestroyWindow();
 
 	m_EditorDialog.SetFirmware(&m_Firmware);
-	m_ThemesDialog.SetFirmware(&m_Firmware, &m_EditorDialog.m_StringDialog);
+	m_ThemesDialog.SetFirmware(&m_Firmware, &m_EditorDialog);
 	
 	//m_iPodFirm=FALSE;
 	GetDlgItem(IDC_WRITE_FIRMWARE_BUTTON)->EnableWindow(TRUE);
@@ -861,8 +861,8 @@ void CiPodWizardDlg::UpdatePages()
 
 void CiPodWizardDlg::OnBnClickedWriteFirmwareButton()
 {
-	/*
-	if (m_iPodFirm)
+/*
+	if (m_Firmware)
 	{
 		if (MessageBox(TEXT("Are you sure you want to write the modified firmware to your iPod?"), TEXT("Warning"), MB_YESNO) != IDYES)
 			return;
@@ -1006,7 +1006,8 @@ void CiPodWizardDlg::OnBnClickedWriteFirmwareButton()
 			if (s.Compare(TEXT("1")))
 				MessageBox(s);
 		}
-	}*/
+	}
+	*/
 }
 
 void CiPodWizardDlg::UpdateChecksums()

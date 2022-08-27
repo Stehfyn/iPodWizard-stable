@@ -205,6 +205,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\Color.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\DialogMinHelpBtn.cpp"
 				>
 			</File>
@@ -285,6 +289,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\RDragDropFiles.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\ResourceManager.cpp"
 				>
 			</File>
@@ -317,7 +325,19 @@
 				>
 			</File>
 			<File
+				RelativePath=".\ThemePreviewer.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\ThemesDialog.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\ThemeWnd.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\TipDlg.cpp"
 				>
 			</File>
 			<File
@@ -352,6 +372,10 @@
 			</File>
 			<File
 				RelativePath=".\cgfiltyp.h"
+				>
+			</File>
+			<File
+				RelativePath=".\Color.h"
 				>
 			</File>
 			<File
@@ -439,6 +463,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\RDragDropFiles.h"
+				>
+			</File>
+			<File
 				RelativePath=".\Resource.h"
 				>
 			</File>
@@ -459,7 +487,19 @@
 				>
 			</File>
 			<File
+				RelativePath=".\ThemePreviewer.h"
+				>
+			</File>
+			<File
 				RelativePath=".\ThemesDialog.h"
+				>
+			</File>
+			<File
+				RelativePath=".\ThemeWnd.h"
+				>
+			</File>
+			<File
+				RelativePath=".\TipDlg.h"
 				>
 			</File>
 			<File

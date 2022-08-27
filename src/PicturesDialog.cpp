@@ -62,7 +62,7 @@ BOOL CPicturesDialog::OnInitDialog()
 	// TODO:  Add extra initialization here
 
 	m_PictureWnd.EnableScrollBar(SB_BOTH, ESB_DISABLE_BOTH);
-	//m_PictureWnd.OnCreate(NULL);
+	m_PictureWnd.OnCreate(NULL);
 
 	return TRUE;  // return TRUE unless you set the focus to a control
 	// EXCEPTION: OCX Property Pages should return FALSE

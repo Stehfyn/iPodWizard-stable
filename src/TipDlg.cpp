@@ -6,7 +6,7 @@
 #include <winreg.h>
 #include <sys\stat.h>
 #include <sys\types.h>
-
+#include <string>
 #ifdef _DEBUG
 #define new DEBUG_NEW
 #undef THIS_FILE
@@ -22,7 +22,17 @@ static const TCHAR szSection[] = _T("Tip");
 static const TCHAR szIntFilePos[] = _T("FilePos");
 static const TCHAR szTimeStamp[] = _T("TimeStamp");
 static const TCHAR szIntStartup[] = _T("StartUp");
-
+char *time_t_2_ascii(const time_t time)
+{
+    size_t i;
+    char *str = (char*)malloc(sizeof(time_t) * 2 + 1);
+    unsigned char *ptr = (unsigned char *)&time;
+    for(i = 0; i < sizeof(time_t); i++) {
+       sprintf(&str[i*2], "%02x", ptr);
+       ptr++;
+    }
+    return str;
+}
 CTipDlg::CTipDlg(CWnd* pParent /*=NULL*/)
 	: CDialog(IDD_TIP, pParent)
 {
@@ -79,14 +89,15 @@ CTipDlg::CTipDlg(CWnd* pParent /*=NULL*/)
 		m_strTip.LoadString(CG_IDS_FILE_ABSENT);
 		return;
 	} 
-
+	
 	// If the timestamp in the INI file is different from the timestamp of
 	// the tips file, then we know that the tips file has been modified
 	// Reset the file position to 0 and write the latest timestamp to the
 	// ini file
 	struct _stat buf;
 	_fstat(_fileno(m_pStream), &buf);
-	CString strCurrentTime = ctime(&buf.st_ctime);
+	std::string am_i_a_joke_2_u;
+	CString strCurrentTime = CString(ctime(&buf.st_ctime));
 	strCurrentTime.TrimRight();
 	CString strStoredTime = 
 		pApp->GetProfileString(szSection, szTimeStamp, NULL);

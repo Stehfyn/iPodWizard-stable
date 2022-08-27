@@ -1,0 +1,11 @@
+
+*.ncb
+*.user
+*.XML
+src/vc80_i.c
+src/vc80.tlb
+src/vc80.h
+*.suo
+src/vc80.h
+src/vc80.tlb
+src/vc80_i.c
