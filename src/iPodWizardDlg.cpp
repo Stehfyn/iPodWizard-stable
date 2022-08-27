@@ -5,19 +5,18 @@
 #include "iPodWizard.h"
 #include "iPodWizardDlg.h"
 #include ".\ipodwizarddlg.h"
-//#include <afxctl.h>
+#include <afxctl.h>
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
 #endif
-
-//#include <atlimage.h>
 
 #include "ResourceManager.h"
 #include "Picture.h"
 #include "ScanDialog.h"
 #include "TweaksDialog.h"
 #include "HelpDialog.h"
+#include "TipDlg.h"
 
 #define BUFSIZE 512
 
@@ -169,15 +168,17 @@ BOOL CiPodWizardDlg::OnInitDialog()
 	m_EditModeCombo.ResetContent();
 	m_EditModeCombo.AddString(_T("Updater"));
 	m_EditModeCombo.AddString(_T("iPod"));
+	m_EditModeCombo.AddString(_T("Firmware File"));
+	m_EditModeCombo.AddString(_T("iPodSoftware File"));
 	m_EditModeCombo.SetCurSel(0);
 
 	// initialize list
 	m_FirmwareList.SetExtendedStyle(m_FirmwareList.GetExtendedStyle()|LVS_EX_FULLROWSELECT);
 	m_FirmwareList.InsertColumn(0, TEXT("#"), LVCFMT_LEFT, 20);
-	m_FirmwareList.InsertColumn(1, TEXT("Checksum1"), LVCFMT_LEFT, 80);
-	m_FirmwareList.InsertColumn(2, TEXT("Checksum2"), LVCFMT_LEFT, 80);
+	m_FirmwareList.InsertColumn(1, TEXT("Image Checksum"), LVCFMT_LEFT, 95);
+	m_FirmwareList.InsertColumn(2, TEXT("Table Checksum"), LVCFMT_LEFT, 95);
 	m_FirmwareList.InsertColumn(3, TEXT("Status"), LVCFMT_LEFT, 80);
-
+	
 	//Initialize pages
 
 	CRect rect;
@@ -185,10 +186,12 @@ BOOL CiPodWizardDlg::OnInitDialog()
 	m_OptionsTab.InsertItem(0, TEXT("Firmware editor"));
 	m_OptionsTab.InsertItem(1, TEXT("Themes"));
 	m_OptionsTab.InsertItem(2, TEXT("Updater"));
+	m_OptionsTab.InsertItem(3, TEXT("Preferences"));
 
 	m_EditorDialog.Create(m_EditorDialog.IDD, &m_OptionsTab);
 	m_ThemesDialog.Create(m_ThemesDialog.IDD, &m_OptionsTab);
 	m_UpdaterDialog.Create(m_UpdaterDialog.IDD, &m_OptionsTab);
+	m_PrefsDialog.Create(m_PrefsDialog.IDD, &m_OptionsTab);
 
 	m_OptionsTab.GetClientRect(&rect);
 	m_OptionsTab.AdjustRect(FALSE, &rect);
@@ -196,6 +199,7 @@ BOOL CiPodWizardDlg::OnInitDialog()
 	m_EditorDialog.MoveWindow(rect);
 	m_ThemesDialog.MoveWindow(rect);
 	m_UpdaterDialog.MoveWindow(rect);
+	m_PrefsDialog.MoveWindow(rect);
 
 	UpdatePages();
 
@@ -808,7 +812,7 @@ void CiPodWizardDlg::OnBnClickedLoadFirmware()
 	m_EditorDialog.SetFirmware(&m_Firmware);
 	m_ThemesDialog.SetFirmware(&m_Firmware, &m_EditorDialog.m_StringDialog);
 	
-	m_iPodFirm=FALSE;
+	//m_iPodFirm=FALSE;
 	GetDlgItem(IDC_WRITE_FIRMWARE_BUTTON)->EnableWindow(TRUE);
 
 	// save settings

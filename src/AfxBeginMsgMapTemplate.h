@@ -58,10 +58,10 @@
         { \
 
 #endif
+
 #elif _MFC_VER >= 0x0800 && _MFC_VER < 0x0900
 
-
-//SF: MFC for Visual C++ 8.0 (MFC 8.x)
+// MFC for Visual C++ 8.0 (MFC 8.x)
 
 #ifdef _AFXDLL
 
@@ -87,6 +87,7 @@
 		typedef baseClass TheBaseClass;        \
 		static const AFX_MSGMAP_ENTRY _messageEntries[] =  \
 		{
+
 #endif
 
 #else

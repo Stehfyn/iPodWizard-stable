@@ -41,7 +41,7 @@ static char ata[4]={0x21,0x41,0x54,0x41};
 
 //iPod Detector and handler:
 //#import "progid:IPodService.iPodManager.1" no_namespace, named_guids, raw_interfaces_only, raw_native_types, no_smart_pointers
-//[ module(name="iPodEventReceiver") ];, embedded_idl
+//[ module(name="iPodEventReceiver") ]; embedded_idl
 
 //File paths definitions:
 #define MO_LOAD_FIRMWARE_PATH(dlg) CString temppath; \

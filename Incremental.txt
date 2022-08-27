@@ -12,3 +12,6 @@ fix impls
 CiPodfWizzardDlg::RefreshiPodDrives()
 void CiPodWizardDlg::OnBnClickedWriteFirmwareButton()
 void CiPodWizardDlg::OnBnClickedLoadipodfwButton()
+
+iPodWizardDlg.cpp imports its own module, but between 1.2 and 1.3 it and others are loaded
+in a header, iPodWizard.h

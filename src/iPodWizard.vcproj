@@ -49,11 +49,12 @@
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
 				RuntimeLibrary="1"
-				TreatWChar_tAsBuiltInType="true"
+				TreatWChar_tAsBuiltInType="false"
 				UsePrecompiledHeader="2"
 				WarningLevel="3"
 				Detect64BitPortabilityProblems="true"
 				DebugInformationFormat="4"
+				CallingConvention="0"
 			/>
 			<Tool
 				Name="VCManagedResourceCompilerTool"
@@ -139,6 +140,7 @@
 				WarningLevel="3"
 				Detect64BitPortabilityProblems="true"
 				DebugInformationFormat="3"
+				CallingConvention="0"
 			/>
 			<Tool
 				Name="VCManagedResourceCompilerTool"
@@ -276,6 +278,10 @@
 			</File>
 			<File
 				RelativePath=".\PictureWnd.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\PrefsDialog.cpp"
 				>
 			</File>
 			<File
@@ -429,6 +435,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\PrefsDialog.h"
+				>
+			</File>
+			<File
 				RelativePath=".\Resource.h"
 				>
 			</File>
@@ -506,7 +516,19 @@
 				RelativePath=".\res\iPodWizard.rc2"
 				>
 			</File>
+			<File
+				RelativePath=".\res\iPodWizard2.ico"
+				>
+			</File>
+			<File
+				RelativePath=".\res\litebulb.bmp"
+				>
+			</File>
 		</Filter>
+		<File
+			RelativePath=".\res\iPodWizard.manifest"
+			>
+		</File>
 		<File
 			RelativePath=".\ReadMe.txt"
 			>
