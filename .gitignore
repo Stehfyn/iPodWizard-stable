@@ -1,0 +1,6 @@
+*.ncb
+*.user
+*.XML
+*.suo
+
+src/Release
