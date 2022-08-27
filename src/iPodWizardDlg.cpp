@@ -5,19 +5,19 @@
 #include "iPodWizard.h"
 #include "iPodWizardDlg.h"
 #include ".\ipodwizarddlg.h"
-#include <afxctl.h>
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
 #endif
+
+//#include <atlimage.h>
 
 #include "ResourceManager.h"
 #include "Picture.h"
 #include "ScanDialog.h"
 #include "TweaksDialog.h"
 #include "HelpDialog.h"
-#include "TipDlg.h"
-
+#include <string>
 #define BUFSIZE 512
 
 //iPod Detector:
@@ -35,7 +35,7 @@ public:
 	{
 		m_pHandler=pHandler;
 	}
-	
+
 	void HookEvents(IiPodManager *piPodM)
 	{
 		__hook(&_IiPodManagerEvents::OniPodStatusChanged, piPodM, &iPodEvents::OniPodStatusChanged);
@@ -168,17 +168,15 @@ BOOL CiPodWizardDlg::OnInitDialog()
 	m_EditModeCombo.ResetContent();
 	m_EditModeCombo.AddString(_T("Updater"));
 	m_EditModeCombo.AddString(_T("iPod"));
-	m_EditModeCombo.AddString(_T("Firmware File"));
-	m_EditModeCombo.AddString(_T("iPodSoftware File"));
 	m_EditModeCombo.SetCurSel(0);
 
 	// initialize list
 	m_FirmwareList.SetExtendedStyle(m_FirmwareList.GetExtendedStyle()|LVS_EX_FULLROWSELECT);
 	m_FirmwareList.InsertColumn(0, TEXT("#"), LVCFMT_LEFT, 20);
-	m_FirmwareList.InsertColumn(1, TEXT("Image Checksum"), LVCFMT_LEFT, 95);
-	m_FirmwareList.InsertColumn(2, TEXT("Table Checksum"), LVCFMT_LEFT, 95);
+	m_FirmwareList.InsertColumn(1, TEXT("Checksum1"), LVCFMT_LEFT, 80);
+	m_FirmwareList.InsertColumn(2, TEXT("Checksum2"), LVCFMT_LEFT, 80);
 	m_FirmwareList.InsertColumn(3, TEXT("Status"), LVCFMT_LEFT, 80);
-	
+
 	//Initialize pages
 
 	CRect rect;
@@ -186,12 +184,10 @@ BOOL CiPodWizardDlg::OnInitDialog()
 	m_OptionsTab.InsertItem(0, TEXT("Firmware editor"));
 	m_OptionsTab.InsertItem(1, TEXT("Themes"));
 	m_OptionsTab.InsertItem(2, TEXT("Updater"));
-	m_OptionsTab.InsertItem(3, TEXT("Preferences"));
 
 	m_EditorDialog.Create(m_EditorDialog.IDD, &m_OptionsTab);
 	m_ThemesDialog.Create(m_ThemesDialog.IDD, &m_OptionsTab);
 	m_UpdaterDialog.Create(m_UpdaterDialog.IDD, &m_OptionsTab);
-	m_PrefsDialog.Create(m_PrefsDialog.IDD, &m_OptionsTab);
 
 	m_OptionsTab.GetClientRect(&rect);
 	m_OptionsTab.AdjustRect(FALSE, &rect);
@@ -199,7 +195,6 @@ BOOL CiPodWizardDlg::OnInitDialog()
 	m_EditorDialog.MoveWindow(rect);
 	m_ThemesDialog.MoveWindow(rect);
 	m_UpdaterDialog.MoveWindow(rect);
-	m_PrefsDialog.MoveWindow(rect);
 
 	UpdatePages();
 
@@ -487,7 +482,6 @@ void CiPodWizardDlg::OnBnClickedTweaks()
 
 void CiPodWizardDlg::RefreshiPodDrives()
 {
-	/*
 	//clean combo
 	m_iPodDriveCombo.ResetContent();
 	m_iPodDevices.RemoveAll();
@@ -495,8 +489,7 @@ void CiPodWizardDlg::RefreshiPodDrives()
 	CString ipod_list; //ipod drives list
 	
 	//Find the iPod devices (check hidden partition == firmware)
-	int j = theApp.BLOCK_SIZE;
-	unsigned char buffer[19];
+	unsigned char buffer[512];
 	int x,list[10]={0},y=0;
 	for (x = 1; x < 10; x++)
 	{
@@ -507,25 +500,32 @@ void CiPodWizardDlg::RefreshiPodDrives()
 		dev = _wopen (devstring, O_RDONLY | _O_RAW);
 
 		if (dev == -1)
-			continue; //lol
+		{
+			CString msg;
+			msg.Format(_T("%d"), errno);
+			CString msg2;
+			msg2.Format(_T("%d"), theApp.BLOCK_SIZE);
+			MessageBox(msg2, msg,MB_OK);
+			//abort();
+			continue;
+		}
 	      
-		lseek(dev, FIRMWARE_START, SEEK_SET);
-		read(dev, buffer, BLOCK_SIZE);
-		
-		for (j = 0; j < BLOCK_SIZE - 6; j++)
+		lseek(dev, theApp.FIRMWARE_START, SEEK_SET);
+		read(dev, buffer, theApp.BLOCK_SIZE);
+
+		for (j = 0; j < theApp.BLOCK_SIZE - 6; j++)
 		{
 
 			if (buffer [j] == 'S' && buffer [j+2] == 'T' && buffer [j+4] == 'O' && buffer [j+6] == 'P')
 			{
 				y++;			
 				list[y]=x;
-				//populates a list of active ipods via physcialdrive expanded value
-				//y is index offset (like a file pointer)
 			}
 		}
 	      
 		close(dev);
 	}
+	delete[] buffer;
 	if (y==0) //Why process all the code if there is no iPod device found?
 		goto ShowStatus;
 
@@ -648,7 +648,7 @@ ShowStatus:
 		m_iPodDriveCombo.SetCurSel(0);
 		theApp.m_DeviceSel=m_iPodDevices.GetAt(m_iPodDriveCombo.GetCurSel());
 	}
-	*/
+	
 }
 
 void CiPodWizardDlg::OnCbnSelChangeiPodDriveCombo()
@@ -812,7 +812,7 @@ void CiPodWizardDlg::OnBnClickedLoadFirmware()
 	m_EditorDialog.SetFirmware(&m_Firmware);
 	m_ThemesDialog.SetFirmware(&m_Firmware, &m_EditorDialog);
 	
-	//m_iPodFirm=FALSE;
+	m_iPodFirm=FALSE;
 	GetDlgItem(IDC_WRITE_FIRMWARE_BUTTON)->EnableWindow(TRUE);
 
 	// save settings
@@ -861,8 +861,7 @@ void CiPodWizardDlg::UpdatePages()
 
 void CiPodWizardDlg::OnBnClickedWriteFirmwareButton()
 {
-/*
-	if (m_Firmware)
+	if (m_iPodFirm)
 	{
 		if (MessageBox(TEXT("Are you sure you want to write the modified firmware to your iPod?"), TEXT("Warning"), MB_YESNO) != IDYES)
 			return;
@@ -900,7 +899,7 @@ void CiPodWizardDlg::OnBnClickedWriteFirmwareButton()
 
 		DWORD size=m_Firmware.GetFirmwareSize();
 		LPBYTE lpBuf=m_Firmware.GetFirmwareBuffer();
-		lseek(dev, FIRMWARE_START, SEEK_SET);
+		lseek(dev, theApp.FIRMWARE_START, SEEK_SET);
 		
 		CScanDialog dlg;
 		dlg.Create(dlg.IDD, this);
@@ -910,23 +909,23 @@ void CiPodWizardDlg::OnBnClickedWriteFirmwareButton()
 		dlg.m_ProgressCtrl.SetPos(0);
 		int m_UpdatesDone=0,ret;
 		DWORD i;
-		for (i=0;i<size;i+=BLOCK_SIZE)
+		for (i=0;i<size;i+=theApp.BLOCK_SIZE)
 		{
-			ret=write(dev, &lpBuf[i], BLOCK_SIZE);
+			ret=write(dev, &lpBuf[i], theApp.BLOCK_SIZE);
 			if (ret==-1 && m_UpdatesDone==0)
 			{
 				close(dev);
 				MessageBox(TEXT("Can't write the modded firmware to your iPod.\r\nYour iPod is remained untouched.\r\nRestarting your computer may help to solve this problem."), TEXT("Error"));
 				return;
 			}
-			else if (ret!=BLOCK_SIZE)
+			else if (ret!=theApp.BLOCK_SIZE)
 			{
 				close(dev);
 				MessageBox(TEXT("A severe writing error occured to the iPod and the firmware might be damaged.\nIn order to fix this, you must go into disk mode (see more info on our website www.iPodWizard.net) and restore or update using original Apple updater."), TEXT("Error"));
 				return;
 			}
 			m_UpdatesDone++;
-			if (i%(BLOCK_SIZE*2000)==0)
+			if (i%(theApp.BLOCK_SIZE*2000)==0)
 			{
 				dlg.m_ProgressCtrl.SetPos(i);
 				dlg.m_ProgressCtrl.UpdateWindow();
@@ -1007,7 +1006,6 @@ void CiPodWizardDlg::OnBnClickedWriteFirmwareButton()
 				MessageBox(s);
 		}
 	}
-	*/
 }
 
 void CiPodWizardDlg::UpdateChecksums()
@@ -1050,7 +1048,6 @@ void CiPodWizardDlg::OnBnClickedAbout()
 
 void CiPodWizardDlg::OnBnClickedLoadipodfwButton()
 {
-	/*
 	if (CheckiPod(FALSE)==-1)
 		return;
 
@@ -1065,9 +1062,9 @@ void CiPodWizardDlg::OnBnClickedLoadipodfwButton()
 
 	DWORD size=0;
 	LPBYTE partitions;
-	lseek(dev, FIRMWARE_START + PARTITION_MAP_ADDRESS, SEEK_SET);
-	partitions = new BYTE[BLOCK_SIZE];
-	read(dev, partitions, BLOCK_SIZE);
+	lseek(dev, theApp.FIRMWARE_START + theApp.PARTITION_MAP_ADDRESS, SEEK_SET);
+	partitions = new BYTE[theApp.BLOCK_SIZE];
+	read(dev, partitions, theApp.BLOCK_SIZE);
 	IPOD_PARTITION_HEADER *	m_pParts;
 	int num=0;
 	char ata[4]={0x21,0x41,0x54,0x41}; 
@@ -1082,10 +1079,10 @@ void CiPodWizardDlg::OnBnClickedLoadipodfwButton()
 	
 	LPBYTE buffer;
 	DWORD i=0;
-	for (i=0;i<size;i+=BLOCK_SIZE);
-	size=i+BLOCK_SIZE; //extra read
+	for (i=0;i<size;i+=theApp.BLOCK_SIZE);
+	size=i+theApp.BLOCK_SIZE; //extra read
 	buffer = new BYTE[size];
-	lseek(dev, FIRMWARE_START, SEEK_SET);
+	lseek(dev, theApp.FIRMWARE_START, SEEK_SET);
 
 	CScanDialog dlg;
 	dlg.Create(dlg.IDD, this);
@@ -1093,9 +1090,9 @@ void CiPodWizardDlg::OnBnClickedLoadipodfwButton()
 	dlg.SendMessage(WM_APP, (WPARAM)_T("Reading iPod firmware from disk"), 0);
 	dlg.m_ProgressCtrl.SetRange32(0, size);
 	dlg.m_ProgressCtrl.SetPos(0);
-	for (i=0;i<size;i+=BLOCK_SIZE)
+	for (i=0;i<size;i+=theApp.BLOCK_SIZE)
 	{
-		read(dev, &buffer[i], BLOCK_SIZE);
+		read(dev, &buffer[i], theApp.BLOCK_SIZE);
 		if (i%2500==0)
 			dlg.m_ProgressCtrl.SetPos(i);
 	}
@@ -1116,11 +1113,10 @@ void CiPodWizardDlg::OnBnClickedLoadipodfwButton()
 	dlg.DestroyWindow();
 
 	m_EditorDialog.SetFirmware(&m_Firmware);
-	m_ThemesDialog.SetFirmware(&m_Firmware, &m_EditorDialog.m_StringDialog);
+	m_ThemesDialog.SetFirmware(&m_Firmware, &m_EditorDialog);//.m_StringDialog);
 	
 	m_iPodFirm=TRUE;
 	GetDlgItem(IDC_WRITE_FIRMWARE_BUTTON)->EnableWindow(TRUE);
-	*/
 }
 
 void CiPodWizardDlg::OnCbnSelchangeModeCombo()

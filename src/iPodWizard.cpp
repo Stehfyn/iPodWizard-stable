@@ -24,6 +24,9 @@ CiPodWizardApp::CiPodWizardApp()
 {
 	// TODO: add construction code here,
 	// Place all significant initialization in InitInstance
+	BLOCK_SIZE = 512;
+	FIRMWARE_START = 32256;
+	PARTITION_MAP_ADDRESS = 0x4200;
 	m_bAdminPrivilege=FALSE;
 }
 

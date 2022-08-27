@@ -552,7 +552,7 @@ void CThemeWnd::SetData(int view_id, int menu_id)
 		}
 	}
 
-	/*
+
 	if (m_pFirmware != NULL)
 	{
 		m_Origin = CPoint(0, 0);
@@ -576,7 +576,6 @@ void CThemeWnd::SetData(int view_id, int menu_id)
 		else
 			EnableScrollBar(SB_VERT, ESB_DISABLE_BOTH);
 	}
-*/
 	Invalidate();
 }
 
