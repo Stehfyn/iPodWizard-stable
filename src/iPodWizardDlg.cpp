@@ -5,6 +5,7 @@
 #include "iPodWizard.h"
 #include "iPodWizardDlg.h"
 #include ".\ipodwizarddlg.h"
+#include <afxctl.h>
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -17,6 +18,7 @@
 #include "ScanDialog.h"
 #include "TweaksDialog.h"
 #include "HelpDialog.h"
+#include "TipDlg.h"
 #include <string>
 #define BUFSIZE 512
 
@@ -102,6 +104,9 @@ CiPodWizardDlg::CiPodWizardDlg(CWnd* pParent /*=NULL*/)
 	: CExDialog(CiPodWizardDlg::IDD, pParent)
 {
 	m_hIcon = AfxGetApp()->LoadIcon(IDR_MAINFRAME);
+	m_FirmwareFileName.Empty();
+	m_FirmwareiPSWFileName.Empty();
+	m_TipFirst = TRUE;
 }
 
 void CiPodWizardDlg::DoDataExchange(CDataExchange* pDX)
@@ -168,14 +173,19 @@ BOOL CiPodWizardDlg::OnInitDialog()
 	m_EditModeCombo.ResetContent();
 	m_EditModeCombo.AddString(_T("Updater"));
 	m_EditModeCombo.AddString(_T("iPod"));
+	m_EditModeCombo.AddString(_T("Firmware File"));
+	m_EditModeCombo.AddString(_T("iPodSoftware File"));
 	m_EditModeCombo.SetCurSel(0);
 
 	// initialize list
 	m_FirmwareList.SetExtendedStyle(m_FirmwareList.GetExtendedStyle()|LVS_EX_FULLROWSELECT);
 	m_FirmwareList.InsertColumn(0, TEXT("#"), LVCFMT_LEFT, 20);
-	m_FirmwareList.InsertColumn(1, TEXT("Checksum1"), LVCFMT_LEFT, 80);
-	m_FirmwareList.InsertColumn(2, TEXT("Checksum2"), LVCFMT_LEFT, 80);
-	m_FirmwareList.InsertColumn(3, TEXT("Status"), LVCFMT_LEFT, 80);
+	m_FirmwareList.InsertColumn(1, TEXT("Image Checksum"), LVCFMT_LEFT, 95);
+	m_FirmwareList.InsertColumn(2, TEXT("Table Checksum"), LVCFMT_LEFT, 95);
+	m_FirmwareList.InsertColumn(3, TEXT("Status"), LVCFMT_LEFT, 65);
+	//m_FirmwareList.InsertColumn(1, TEXT("Checksum1"), LVCFMT_LEFT, 80);
+	//m_FirmwareList.InsertColumn(2, TEXT("Checksum2"), LVCFMT_LEFT, 80);
+	//m_FirmwareList.InsertColumn(3, TEXT("Status"), LVCFMT_LEFT, 80);
 
 	//Initialize pages
 
@@ -184,17 +194,19 @@ BOOL CiPodWizardDlg::OnInitDialog()
 	m_OptionsTab.InsertItem(0, TEXT("Firmware editor"));
 	m_OptionsTab.InsertItem(1, TEXT("Themes"));
 	m_OptionsTab.InsertItem(2, TEXT("Updater"));
+	m_OptionsTab.InsertItem(3, TEXT("Preferences"));
 
 	m_EditorDialog.Create(m_EditorDialog.IDD, &m_OptionsTab);
 	m_ThemesDialog.Create(m_ThemesDialog.IDD, &m_OptionsTab);
 	m_UpdaterDialog.Create(m_UpdaterDialog.IDD, &m_OptionsTab);
-
+	m_PrefsDialog.Create(m_PrefsDialog.IDD, &m_OptionsTab);
 	m_OptionsTab.GetClientRect(&rect);
 	m_OptionsTab.AdjustRect(FALSE, &rect);
 
 	m_EditorDialog.MoveWindow(rect);
 	m_ThemesDialog.MoveWindow(rect);
 	m_UpdaterDialog.MoveWindow(rect);
+	m_PrefsDialog.MoveWindow(rect);
 
 	UpdatePages();
 
@@ -395,6 +407,20 @@ int CiPodWizardDlg::OnCreate(LPCREATESTRUCT lpCreateStruct)
 		return -1;
 	return 0;
 }
+void CiPodWizardDlg::ShowTipAtStartup(void)
+{
+	// CG: This function added by 'Tip of the Day' component.
+
+	CCommandLineInfo cmdInfo;
+	theApp.ParseCommandLine(cmdInfo);
+	if (cmdInfo.m_bShowSplash)
+	{
+		CTipDlg dlg;
+		if (dlg.m_bStartup)
+			dlg.DoModal();
+	}
+
+}
 
 void CiPodWizardDlg::OnDestroy()
 {
@@ -431,6 +457,11 @@ void CiPodWizardDlg::OnPaint()
 
 		// Draw the icon
 		dc.DrawIcon(x, y, m_hIcon);
+	}
+	else if (m_TipFirst)
+	{
+		m_TipFirst=FALSE;
+		ShowTipAtStartup();
 	}
 	else
 	{
@@ -845,16 +876,25 @@ void CiPodWizardDlg::UpdatePages()
 		m_EditorDialog.ShowWindow(SW_SHOW);
 		m_ThemesDialog.ShowWindow(SW_HIDE);
 		m_UpdaterDialog.ShowWindow(SW_HIDE);
+		m_PrefsDialog.ShowWindow(SW_HIDE);
 		break;
 	case 1: //Themes
 		m_EditorDialog.ShowWindow(SW_HIDE);
 		m_ThemesDialog.ShowWindow(SW_SHOW);
 		m_UpdaterDialog.ShowWindow(SW_HIDE);
+		m_PrefsDialog.ShowWindow(SW_HIDE);
 		break;
 	case 2: //Updater
 		m_EditorDialog.ShowWindow(SW_HIDE);
 		m_ThemesDialog.ShowWindow(SW_HIDE);
 		m_UpdaterDialog.ShowWindow(SW_SHOW);
+		m_PrefsDialog.ShowWindow(SW_HIDE);
+		break;
+	case 3: //Preferences
+		m_EditorDialog.ShowWindow(SW_HIDE);
+		m_ThemesDialog.ShowWindow(SW_HIDE);
+		m_UpdaterDialog.ShowWindow(SW_HIDE);
+		m_PrefsDialog.ShowWindow(SW_SHOW);
 		break;
 	}
 }

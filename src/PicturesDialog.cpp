@@ -49,7 +49,7 @@ BEGIN_MESSAGE_MAP(CPicturesDialog, CDialog)
 	ON_BN_CLICKED(ID_COPY_IMAGE, &CPicturesDialog::OnBnClickedCopyImage)
 	ON_MESSAGE(WM_APP, OnDropPictureFiles)
 	ON_BN_CLICKED(ID_FIND_BITMAP_RSRC, &CPicturesDialog::OnBnClickedFindBitmapRsrc)
-	ON_BN_CLICKED(IDC_THEMEPREVIEW_BUTTON, OnBnClickedThemePreview)
+	ON_BN_CLICKED(IDC_THEMEPREVIEW_BUTTON, &CPicturesDialog::OnBnClickedThemePreview)
 END_MESSAGE_MAP()
 
 
@@ -69,12 +69,18 @@ BOOL CPicturesDialog::OnInitDialog()
 }
 
 void CPicturesDialog::OnBnClickedThemePreview()
-{
-	//CThemePreviewDialog dlg;
+{	//@stehfyn: "spaghetti debt"
+	//    this callback took 4 hours to get working
+
+	CThemePreviewDialog dlg;
 	
-	//dlg.SetFirmware(m_pFirmware, m_pEditorDialog);
-	//dlg.DoModal();
-	m_pThemePreview->SendMessage(BM_CLICK, 0, 0);
+	dlg.SetFirmware(m_pFirmware, m_pEditorDialog);
+	dlg.DoModal();
+	
+	//for posterity
+	//m_pThemePreview = GetDlgItem(IDC_THEMEPREVIEW_BUTTON);
+	//if (m_pThemePreview!=NULL)
+		//m_pThemePreview->SendMessage(BM_CLICK, 0, 0);
 }
 
 LRESULT CPicturesDialog::OnDropPictureFiles(WPARAM wParam, LPARAM lParam)
@@ -182,13 +188,13 @@ void CPicturesDialog::UpdatePicture()
 	GetDlgItem(IDC_THEMEPREVIEW_BUTTON)->EnableWindow(TRUE);
 }
 
-void CPicturesDialog::SetFirmware(CFirmware *pFirmware, CLayoutDialog *pLayoutDialog, CWnd *pThemePreview)
+void CPicturesDialog::SetFirmware(CFirmware *pFirmware, CLayoutDialog *pLayoutDialog, CEditorDialog *pEditorDialog)
 {
 	m_pFirmware = pFirmware;
 
 	m_pLayoutDialog = pLayoutDialog;
 
-	m_pThemePreview = pThemePreview;
+	m_pEditorDialog = pEditorDialog;
 
 	m_PictureIndex = 0;
 

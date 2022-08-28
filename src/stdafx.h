@@ -54,7 +54,7 @@
 #include <atlcom.h>
 #include <atlimage.h>
 #include <comutil.h>
-
+#include "ThemePreviewer.h"
 #define ARRSIZE(x)	(sizeof(x)/sizeof(x[0]))
 
 static char *Unicode2MB(CString& sinput)

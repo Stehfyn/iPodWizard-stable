@@ -309,7 +309,7 @@ void CiPodWizardApp::EndRunAsAdmin()
 		m_bAdminPrivilege=FALSE;
 
 		//  When you have finished using the credentials,
-	//  erase them from memory.
+		//  erase them from memory.
 		SecureZeroMemory(pszName, sizeof(pszName));
 		SecureZeroMemory(pszPwd, sizeof(pszPwd));
 	}

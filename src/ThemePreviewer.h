@@ -5,7 +5,7 @@
 #include "afxcmn.h"
 #include "Firmware.h"
 #include "ThemeWnd.h"
-#include "EditorDialog.h"
+//#include "EditorDialog.h"
 
 #include <fstream>
 using namespace std;
@@ -13,6 +13,7 @@ using namespace std;
 class CEditorDialog;
 
 #define NUM_ELEM(x) ((int)(sizeof(x) / sizeof(x[0])))
+
 
 struct res_size
 {
@@ -26,8 +27,9 @@ static struct res_size RES_SIZES[] =
 	{220, 176, _T("220x176 - 4G")},
 	{220, 154, _T("220x154 - Photo")},
 	{176, 132, _T("176x132 - Nano")},
-	{138, 110, _T("138x110 - Mini")},
+	{138, 110, _T("138x110 - Mini")}
 };
+
 
 // CThemePreviewDialog dialog
 
