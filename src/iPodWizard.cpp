@@ -24,9 +24,6 @@ CiPodWizardApp::CiPodWizardApp()
 {
 	// TODO: add construction code here,
 	// Place all significant initialization in InitInstance
-	BLOCK_SIZE = 512;
-	FIRMWARE_START = 32256;
-	PARTITION_MAP_ADDRESS = 0x4200;
 	m_bAdminPrivilege=FALSE;
 }
 
@@ -309,7 +306,7 @@ void CiPodWizardApp::EndRunAsAdmin()
 		m_bAdminPrivilege=FALSE;
 
 		//  When you have finished using the credentials,
-		//  erase them from memory.
+	//  erase them from memory.
 		SecureZeroMemory(pszName, sizeof(pszName));
 		SecureZeroMemory(pszPwd, sizeof(pszPwd));
 	}

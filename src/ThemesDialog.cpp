@@ -140,7 +140,6 @@ void CThemesDialog::SetFirmware(CFirmware *pFirmware, CEditorDialog *pEditorDial
 
 void CThemesDialog::OnBnClickedMakeTheme()
 {
-	/* Zip dependency
 	//The firmware of the desired iPod must be loaded.
 	if (m_pFirmware==NULL)
 	{
@@ -176,7 +175,7 @@ void CThemesDialog::OnBnClickedMakeTheme()
 	MO_SAVE_RESOURCES_PATH(dlg)
 	CFile file;
 	CZipArchive zip;
-	zip.Open(dlg.GetPathName(), CZipArchive::create);
+	zip.Open(dlg.GetPathName(), CZipArchive::zipCreate);
 
 	CString s,s2,sMsg;
 	CFile scffile;
@@ -187,8 +186,9 @@ void CThemesDialog::OnBnClickedMakeTheme()
 	CString name;
 	name=m_pFirmware->GetName();
 	
-	CFileHeader fhinfo;
-	fhinfo.m_szFileName.SetString(_T("firmware-id"));
+	CZipFileHeader fhinfo;
+	//fhinfo.m_pszFileName->SetString(_T("firmware-id"));
+	fhinfo.SetFileName(_T("firmware-id"));
 	zip.OpenNewFile(fhinfo);
 	DWORD version=m_pFirmware->GetFirmwareVersion();
 	zip.WriteNewFile(&version, 4);
@@ -248,7 +248,7 @@ void CThemesDialog::OnBnClickedMakeTheme()
 				goto readerror;
 			}
 			w=font.GetFontBlockLen();
-			fhinfo.m_szFileName.Format(_T("%s-%s-%d.fnt"), font.GetFontName(), font.GetFontStyle(), font.GetFontSize());
+			fhinfo.m_pszFileName->Format(_T("%s-%s-%d.fnt"), font.GetFontName(), font.GetFontStyle(), font.GetFontSize());
 			zip.OpenNewFile(fhinfo);
 			zip.WriteNewFile(m_pFirmware->GetFont(value), w);
 			zip.CloseNewFile();
@@ -261,7 +261,7 @@ void CThemesDialog::OnBnClickedMakeTheme()
 				goto readerror;
 			}
 			w=ofont.GetFontBlockLen();
-			fhinfo.m_szFileName.Format(_T("%s-%s-%d"), ofont.GetFontName(), ofont.GetFontStyle(), ofont.GetFontSize());
+			fhinfo.m_pszFileName->Format(_T("%s-%s-%d"), ofont.GetFontName(), ofont.GetFontStyle(), ofont.GetFontSize());
 			zip.OpenNewFile(fhinfo);
 			zip.WriteNewFile(m_pFirmware->GetOTFFont(value), w);
 			zip.CloseNewFile();
@@ -276,7 +276,7 @@ void CThemesDialog::OnBnClickedMakeTheme()
 		goto nextstep;
 
 	w=(DWORD)m_StringIndexCombo.GetCurSel();
-	fhinfo.m_szFileName.Format(_T("StringList-%d.txt"), w);
+	fhinfo.m_pszFileName->Format(_T("StringList-%d.txt"), w);
 	zip.OpenNewFile(fhinfo);
 	w=(DWORD)scffile.GetLength();
 	buffer = new BYTE[w];
@@ -304,7 +304,6 @@ readerror:
 	DeleteFile(dlg.GetPathName());
 	sMsg.AppendFormat(TEXT("\nAborting theme maker."));
 	MessageBox(sMsg);
-	*/
 }
 
 BOOL CThemesDialog::LoadOTFFont(COTFFont *pFont, DWORD index, LPCTSTR lpszFilename)
@@ -496,16 +495,15 @@ void CThemesDialog::OnBnClickedLoadTheme()
 
 void CThemesDialog::LoadTheme(CString filename)
 {
-	/*
 	CZipArchive zip;
-	zip.Open(filename, CZipArchive::openReadOnly);
+	zip.Open(filename, CZipArchive::zipOpenReadOnly);
 	CString extract_dir;
 	extract_dir=filename.Left(filename.ReverseFind('\\')+1);
 	extract_dir.AppendFormat(_T("ThemeTempDir"));
-	CFileHeader finfo;
+	CZipFileHeader finfo;
 	CStringArray files;
 	DWORD nBufSize = 65535;
-	CAutoBuffer buffer(nBufSize);
+	CZipAutoBuffer buffer(nBufSize);
 
 	//Check firmware identification to make sure it matches the currently loaded firmware.
 	int file_id=zip.FindFile(_T("firmware-id"));
@@ -548,14 +546,15 @@ void CThemesDialog::LoadTheme(CString filename)
 	//Read firmware version and check if it's good //
 	
 	//Extract all files to temporary directory for loading
-	for (WORD i = 0; i < zip.GetNoEntries(); i++)
+	//for (WORD i = 0; i < zip.GetNoEntries(); i++)
+	for (WORD i = 0; i < zip.GetCount(); i++)
 	{
-		//if (!zip.OpenFile(i))
-		//{
-		//	MessageBox(_T("Theme file corrupted!"));
-		//	zip.Close();
-		//	return;
-		//}
+		/*if (!zip.OpenFile(i))
+		{
+			MessageBox(_T("Theme file corrupted!"));
+			zip.Close();
+			return;
+		}*/
 
 		if (!zip.GetFileInfo(finfo, i))
 		{
@@ -565,10 +564,10 @@ void CThemesDialog::LoadTheme(CString filename)
 			goto finishup;
 		}
 
-		CString ifile=finfo.m_szFileName; //MB2Unicode((char *)finfo.m_szFileName.GetBuffer());
+		CString ifile=*finfo.m_pszFileName; //MB2Unicode((char *)finfo.m_szFileName.GetBuffer());
 		if (!ifile.Right(3).Compare(_T("fnt")) || !ifile.Right(3).Compare(_T("jpg")) || !ifile.Right(3).Compare(_T("bmp")) || !ifile.Right(3).Compare(_T("png")) || !ifile.Right(3).Compare(_T("txt")) || !ifile.Right(3).Compare(_T("rsrc")))
 		{
-			files.Add(finfo.m_szFileName);
+			files.Add(*finfo.m_pszFileName);
 			zip.ExtractFile(i, extract_dir);
 		}
 	}
@@ -597,11 +596,11 @@ void CThemesDialog::LoadTheme(CString filename)
 			goto finishup;
 		}
 
-		int fpos=finfo.m_szFileName.Find('-');
+		int fpos=finfo.m_pszFileName->Find('-');
 		DWORD ilang=-1;
 		if (fpos!=-1)
 		{
-			CString mylang=finfo.m_szFileName.Right(finfo.m_szFileName.GetLength()-fpos);
+			CString mylang=finfo.m_pszFileName->Right(finfo.m_pszFileName->GetLength()-fpos);
 			if (mylang.IsEmpty()==FALSE)
 				ilang=(DWORD)_ttoi(mylang);
 		}	
@@ -612,7 +611,7 @@ void CThemesDialog::LoadTheme(CString filename)
 			CString strfile;
 			strfile=extract_dir;
 			strfile.Append(_T("\\"));
-			strfile.Append(finfo.m_szFileName);
+			strfile.Append(*finfo.m_pszFileName);
 			if (!file.Open(strfile, CFile::modeRead))
 			{
 				MessageBox(TEXT("Unable to load strings file!"));
@@ -632,9 +631,8 @@ void CThemesDialog::LoadTheme(CString filename)
 			}
 		}
 	}
-	*/
 
-//hey no zip :)
+
 /*
 	//Make validation checks to see if this theme is compatible with the current loaded firmware
 	int bFirmCompare=0;
@@ -672,7 +670,6 @@ void CThemesDialog::LoadTheme(CString filename)
 			return;
 		}
 */
-/* zip dep
 	zip.Close();
 
 	RecursiveDelete(extract_dir);
@@ -684,18 +681,16 @@ void CThemesDialog::LoadTheme(CString filename)
 	m_SCFPath.Empty();
 	//
 	MessageBox(TEXT("Successfully loaded theme file!"));
-*/
 	return;
 
-//finishup:
-	//RecursiveDelete(extract_dir);
-	//RemoveDirectory(extract_dir);
+finishup:
+	RecursiveDelete(extract_dir);
+	RemoveDirectory(extract_dir);
 }
 
 void CThemesDialog::OnBnClickedLoadGraphics()
 {
 	//The firmware of the desired iPod must be loaded.
-	/*
 	if (m_pFirmware==NULL)
 	{
 		MessageBox(TEXT("Can't load graphics!\nYou must load the firmware you intend to put the theme on before you can load graphics."));
@@ -816,7 +811,7 @@ void CThemesDialog::OnBnClickedLoadGraphics()
 			s.Format(TEXT("Found %d valid picture(s)."), c);
 			MessageBox(s);
 		}
-	}*/
+	}
 }
 
 void CThemesDialog::OnBnClickedDeleteGraphic()
@@ -1166,7 +1161,6 @@ void CThemesDialog::OnBnClickedExplainButton()
 
 void CThemesDialog::OnBnClickedMakefullthemeButton()
 {
-	/*
 	CWaitCursor wait;
 	//The firmware of the desired iPod must be loaded.
 	if (m_pFirmware==NULL)
@@ -1183,7 +1177,7 @@ void CThemesDialog::OnBnClickedMakefullthemeButton()
 	MO_SAVE_RESOURCES_PATH(dlg)
 	CFile file;
 	CZipArchive zip;
-	zip.Open(dlg.GetPathName(), CZipArchive::create);
+	zip.Open(dlg.GetPathName(), CZipArchive::zipCreate);
 
 	CString s,s2,sMsg;
 	CFile scffile;
@@ -1192,8 +1186,9 @@ void CThemesDialog::OnBnClickedMakefullthemeButton()
 
 	//write current firmware version for later identification purposes:
 	
-	CFileHeader fhinfo;
-	fhinfo.m_szFileName.SetString(_T("firmware-id"));
+	CZipFileHeader fhinfo;
+	//fhinfo.m_szFileName.SetString(_T("firmware-id"));
+	fhinfo.SetFileName(_T("firmware-id"));
 	zip.OpenNewFile(fhinfo);
 	DWORD version=m_pFirmware->GetFirmwareVersion();
 	zip.WriteNewFile(&version, 4);
@@ -1238,7 +1233,7 @@ void CThemesDialog::OnBnClickedMakefullthemeButton()
 			}
 
 			w=font.GetFontBlockLen();
-			fhinfo.m_szFileName.Format(_T("%s-%s-%d.fnt"), font.GetFontName(), font.GetFontStyle(), font.GetFontSize());
+			fhinfo.m_pszFileName->Format(_T("%s-%s-%d.fnt"), font.GetFontName(), font.GetFontStyle(), font.GetFontSize());
 			zip.OpenNewFile(fhinfo);
 			zip.WriteNewFile(m_pFirmware->GetFont(x), w);
 			zip.CloseNewFile();
@@ -1253,7 +1248,7 @@ void CThemesDialog::OnBnClickedMakefullthemeButton()
 			}
 
 			w=ofont.GetFontBlockLen();
-			fhinfo.m_szFileName.Format(_T("%s-%s-%d"), ofont.GetFontName(), ofont.GetFontStyle(), ofont.GetFontSize());
+			fhinfo.m_pszFileName->Format(_T("%s-%s-%d"), ofont.GetFontName(), ofont.GetFontStyle(), ofont.GetFontSize());
 			zip.OpenNewFile(fhinfo);
 			zip.WriteNewFile(m_pFirmware->GetOTFFont(x), w);
 			zip.CloseNewFile();
@@ -1274,7 +1269,7 @@ void CThemesDialog::OnBnClickedMakefullthemeButton()
 			goto nextstep;
 
 		w=(DWORD)m_StringIndexCombo.GetCurSel();
-		fhinfo.m_szFileName.Format(_T("StringList-%d.txt"), w);
+		fhinfo.m_pszFileName->Format(_T("StringList-%d.txt"), w);
 		zip.OpenNewFile(fhinfo);
 		w=(DWORD)scffile.GetLength();
 		buffer = new BYTE[w];
@@ -1361,5 +1356,4 @@ readerror:
 	RemoveDirectory(folderPath);
 	sMsg.AppendFormat(TEXT("\nAborting theme maker."));
 	MessageBox(sMsg);
-	*/
 }

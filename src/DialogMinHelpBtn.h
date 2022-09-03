@@ -38,7 +38,6 @@ protected:
     virtual BOOL OnInitDialog();
     afx_msg void OnNcPaint();
     afx_msg BOOL OnNcActivate(BOOL bActive);
-	//SF: UINT -> LRESULT https://stackoverflow.com/questions/42442457/error-c2440-static-cast-cannot-convert-from-uint-thiscall-cimportprojec
     afx_msg LRESULT OnNcHitTest(CPoint point);
     afx_msg void OnNcLButtonDown(UINT nHitTest, CPoint point);
     afx_msg void OnNcRButtonDown(UINT nHitTest, CPoint point);

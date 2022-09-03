@@ -165,7 +165,6 @@ void CStringDialog::OnBnClickedStringFilterButton()
 
 	if (dlg.DoModal() != IDOK)
 		return;
-
 	MO_SAVE_RESOURCES_PATH(dlg)
 	CFile file;
 	if (!file.Open(dlg.GetPathName(), CFile::modeRead))

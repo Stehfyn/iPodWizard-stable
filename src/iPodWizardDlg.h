@@ -14,7 +14,7 @@
 
 #include "DialogMinHelpBtn.h"
 //#include "MFCSink.h"
-#include "..\zip\ZipArchive.h"
+#include "..\Zip\ZipArchive.h"
 
 BOOL CALLBACK myWinFunc(HWND handle, LPARAM lParam);
 BOOL CALLBACK myChildWinFunc(HWND handle, LPARAM lParam);
@@ -41,8 +41,7 @@ protected:
 	CString	m_Filename;
 	CResourceManager m_RsrcMgr;
 	CFirmware m_Firmware;
-	BOOL m_iPodFirm;
-	//int m_FirmMode;
+	int m_FirmMode;
 	CString m_ThemeFirmware;
 	CString m_ThemeFile;
 	CString m_iPSWFile;

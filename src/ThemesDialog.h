@@ -9,7 +9,7 @@
 #include "afxcmn.h"
 #include "ThemePreviewer.h"
 
-//#include "..\Zip\ZipArchive.h"
+#include "..\Zip\ZipArchive.h"
 
 // CThemesDialog dialog
 

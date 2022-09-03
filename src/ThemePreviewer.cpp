@@ -261,10 +261,6 @@ void CThemePreviewDialog::OnBnClickedLoadscreenButton()
 				}
 				pch = strtok (NULL, ",");
 			}
-			CString msg1, msg2;
-			msg1.Format(_T("lang: %d\nid: %d\nx: %d\ny: %d\nfontid: %d"), text_rec->lang, text_rec->id, text_rec->inner.x, text_rec->inner.y, text_rec->fontid);
-			msg2.Format(_T("TEXT"));
-			MessageBox(msg1, msg2, MB_OK);
 			m_ThemeWnd.TextRecList.push_back(text_rec);
 		}
     }

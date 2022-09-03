@@ -2,7 +2,7 @@
 #define AFX_PICTURESDIALOG_H__6D1C0A60_F616_43C6_9850_F3C0F052C0DB__INCLUDED_
 
 #pragma once
-//#include "ThemePreviewer.h"
+
 #include "Firmware.h"
 #include "PictureWnd.h"
 #include "LayoutDialog.h"
@@ -10,7 +10,7 @@
 #include "ScanDialog.h"
 
 class CLayoutDialog;
-class CEditorDialog;
+
 // CPicturesDialog dialog
 
 class CPicturesDialog : public CDialog
@@ -36,7 +36,6 @@ public:
 	CPicture m_Picture;
 	CPictureWnd m_PictureWnd;
 	CLayoutDialog * m_pLayoutDialog;
-	CEditorDialog * m_pEditorDialog;
 	void UpdatePicture();
 	CFirmware * m_pFirmware;
 	DWORD m_PictureIndex;
@@ -44,7 +43,7 @@ public:
 	int m_PictureHeight;
 	int m_PictureBitdepth;
 	int m_PictureID;
-	void SetFirmware(CFirmware *pFirmware, CLayoutDialog *pLayoutDialog, CEditorDialog *pEditorDialog);
+	void SetFirmware(CFirmware *pFirmware, CLayoutDialog *pLayoutDialog, CWnd *pThemePreview);
 	afx_msg void OnBnClickedSaveBitmap();
 	int m_PictureType;
 	CComboBox m_PicIndexCombo;

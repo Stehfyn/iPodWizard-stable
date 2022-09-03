@@ -1095,7 +1095,7 @@ void CFontsDialog::OnBnClickedButton1()
 	OnCbnSelchangeCharCombo();
 	//OnBnClickedSaveBitmap();*/
 
-	//Disabling OldFont as no MakeFont() impl
+
 	if (theApp.m_OldFontMetricsSystem)
 	{
 		LPBYTE fntb=m_Font.MakeFont();

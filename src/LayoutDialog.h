@@ -7,7 +7,7 @@
 #include "afxwin.h"
 #include <Afxtempl.h>
 #include "HexEditor.h"
-
+#include "PicturesDialog.h"
 #include "StringDialog.h"
 #include "ToolTipListCtrl.h"
 #include <algorithm>

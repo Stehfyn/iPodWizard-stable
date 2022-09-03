@@ -255,7 +255,7 @@ void CEditorDialog::UpdatePages(BOOL bFonts)
 void CEditorDialog::SetFirmware(CFirmware *pFirmware)
 {
 	//Initialize firmware on all sections
-	m_PicsDialog.SetFirmware(pFirmware, &m_LayoutDialog, this);
+	m_PicsDialog.SetFirmware(pFirmware, &m_LayoutDialog, m_pThemePreview);
 	m_FontsDialog.SetFirmware(pFirmware, &m_LayoutDialog);
 	m_OTFDialog.SetFirmware(pFirmware, &m_LayoutDialog);
 	m_StringDialog.SetFirmware(pFirmware);
