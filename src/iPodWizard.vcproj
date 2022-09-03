@@ -158,6 +158,7 @@
 			<Tool
 				Name="VCLinkerTool"
 				AdditionalDependencies="Credui.lib wininet.lib Version.lib"
+				ShowProgress="1"
 				LinkIncremental="1"
 				IgnoreDefaultLibraryNames="LIBC;nafxcwd"
 				GenerateDebugInformation="true"
@@ -194,6 +195,10 @@
 		</Configuration>
 	</Configurations>
 	<References>
+		<ProjectReference
+			ReferencedProjectIdentifier="{342C6CC5-06F0-4A06-83CD-C52E210E1B6D}"
+			RelativePathToProject="..\zip\ZipArchive.vcproj"
+		/>
 	</References>
 	<Files>
 		<Filter

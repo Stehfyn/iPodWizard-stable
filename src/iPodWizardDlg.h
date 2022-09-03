@@ -14,7 +14,7 @@
 
 #include "DialogMinHelpBtn.h"
 //#include "MFCSink.h"
-//#include "..\Zip\ZipArchive.h"
+#include "..\zip\ZipArchive.h"
 
 BOOL CALLBACK myWinFunc(HWND handle, LPARAM lParam);
 BOOL CALLBACK myChildWinFunc(HWND handle, LPARAM lParam);
@@ -61,7 +61,7 @@ protected:
 	afx_msg void OnTimer(UINT nIDEvent);
 	afx_msg HCURSOR OnQueryDragIcon();
 	void ThemeChecker();
-	//CZipArchive m_zip;
+	CZipArchive m_zip;
 	DECLARE_MESSAGE_MAP()
 private:
 	//MFCSink *m_pSink;

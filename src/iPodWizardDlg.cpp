@@ -1178,3 +1178,554 @@ void CiPodWizardDlg::OnCbnSelchangeModeCombo()
 		GetDlgItem(IDC_LOADIPODFW_BUTTON)->ShowWindow(SW_SHOW);
 	}
 }
+<<<<<<< Updated upstream
+=======
+
+void CiPodWizardDlg::OnLvnItemRightClickedFirmwareList(NMHDR *pNMHDR, LRESULT *pResult)
+{
+	LPNMLISTVIEW pNMLV = reinterpret_cast<LPNMLISTVIEW>(pNMHDR);
+
+	if (pNMLV->iItem==-1)
+		return;
+	
+	HMENU hMenu = LoadMenu (NULL, MAKEINTRESOURCE (IDR_MENU1));
+	HMENU hPopupMenu = GetSubMenu (hMenu, 0);
+	POINT pt;
+	SetMenuDefaultItem (hPopupMenu, -1, TRUE);
+	GetCursorPos (&pt);
+	SetForegroundWindow();
+	HMENU hSel=(HMENU)TrackPopupMenu (hPopupMenu, 
+	  TPM_LEFTALIGN | TPM_RETURNCMD, pt.x, pt.y, 0, this->m_hWnd, NULL);
+	if (hSel!=0)
+	{
+		m_Firmware.FixChecksum(pNMLV->iItem);
+		UpdateChecksums();
+	}
+	SetForegroundWindow();
+	DestroyMenu (hPopupMenu);
+	DestroyMenu (hMenu);
+
+	*pResult = 0;
+}
+
+void CiPodWizardDlg::OnBnClickedWriteFirmwareButton()
+{
+	if (m_FirmMode==1)
+	{
+		if (MessageBox(TEXT("Are you sure you want to write the modified firmware to your iPod?\nBefore continuing please make sure iPodWizard is running in front and don't switch to any other program while writing the firmware to the iPod!!!"), TEXT("Warning"), MB_YESNO) != IDYES)
+			return;
+
+		if (theApp.m_BootPicChanged)
+			if (theApp.m_ReflashBootImage)
+				m_Firmware.ResetImageAdresses();
+			else if (MessageBox(_T("You've changed the boot flash image (boot images).\nDo you want to reflash it so it updates the image upon iPod reset?\nWarning: Make sure you don't disconnect your iPod during the flash update (bar filling)!"), _T("Question"), MB_YESNO) == IDYES)
+				m_Firmware.ResetImageAdresses();
+
+		if (m_Firmware.GetNumOTFFonts()>0)
+		{
+			COTFFont m_Font;
+			for (DWORD i=0;i<m_Firmware.GetNumOTFFonts();i++)
+			{
+				if (!m_Font.Read(m_Firmware.GetOTFFont(i), FALSE))
+				{
+					MessageBox(TEXT("One of the OTF fonts is damages and therefor iPodWizard cannot write the update as it may cause damage to iPod.\nPlease reload the firmware and make the changes again."));
+					return;
+				}
+				m_Font.SyncChecksums();
+			}
+		}
+
+		theApp.m_SavingFirmware=TRUE;
+
+		m_Firmware.SyncChecksum();
+
+		UpdateChecksums();
+
+		if (CheckiPod(FALSE)==-1)
+			return;
+
+		TCHAR devstring[25];
+		wsprintf (devstring, TEXT("%s"), theApp.m_DeviceSel);
+		int dev = _wopen (devstring, O_WRONLY | _O_RAW);
+		if (dev==-1)
+		{
+			MessageBox(TEXT("Unable to access iPod! Make sure programs who use the iPod like iTunes are closed."));
+			return;
+		}
+
+		DWORD size=m_Firmware.GetFirmwareSize();
+		LPBYTE lpBuf=m_Firmware.GetFirmwareBuffer();
+		_lseek(dev, theApp.FIRMWARE_START, SEEK_SET);
+		
+		CScanDialog dlg;
+		dlg.Create(dlg.IDD, this);
+
+		dlg.SendMessage(WM_APP, (WPARAM)_T("Writing iPod firmware to disk"), 0);
+		dlg.m_ProgressCtrl.SetRange32(0, size);
+		dlg.m_ProgressCtrl.SetPos(0);
+		int m_UpdatesDone=0,ret;
+		DWORD i;
+		/*
+		for (i=0;i<size;i+=theApp.BLOCK_SIZE)
+		{
+			ret=_write(dev, &lpBuf[i], theApp.BLOCK_SIZE);
+			if (ret==-1 && m_UpdatesDone==0)
+			{
+				_close(dev);
+				MessageBox(TEXT("Can't write the modded firmware to your iPod.\r\nYour iPod is remained untouched.\r\nRestarting your computer may help to solve this problem."), TEXT("Error"));
+				return;
+			}
+			else if (ret!=theApp.BLOCK_SIZE)
+			{
+				_close(dev);
+				MessageBox(TEXT("A severe writing error occured to the iPod and the firmware might be damaged.\nIn order to fix this, you must go into disk mode (see more info on our website www.iPodWizard.net) and restore or update using original Apple updater."), TEXT("Error"));
+				return;
+			}
+			m_UpdatesDone++;
+			if (i%(theApp.BLOCK_SIZE*2000)==0)
+			{
+				dlg.m_ProgressCtrl.SetPos(i);
+				dlg.m_ProgressCtrl.UpdateWindow();
+			}
+		}*/
+
+		DWORD szret=_pdwrite(dev, &lpBuf[0], size, theApp.BLOCK_SIZE);
+		if (szret!=size)
+		{
+			WCHAR cc[200];
+			wsprintf(cc, _T("ERROR %d"), szret);
+			MessageBox(cc);
+			return;
+		}
+
+		dlg.m_ProgressCtrl.SetPos(size);
+		dlg.m_ProgressCtrl.UpdateWindow();
+		_close(dev);
+		dlg.DestroyWindow();
+
+		theApp.m_SavingFirmware=FALSE;
+
+		MessageBox(TEXT("Successfully written the modded firmware to your iPod!\r\nWarning: According to Apple's EULA, uploading firmware to 3rd party websites is prohibited! Use this firmware for personal use only!\r\nNow in order for changed to take order, you need to safe remove your iPod from your computer and the iPod will auto reset itself."));
+	}
+	else if (m_FirmMode==0)
+	{
+		if (MessageBox(TEXT("Are you sure you want to write the modified firmware to the updater?"), TEXT("Warning"), MB_YESNO) != IDYES)
+			return;
+
+		//Check for diskspace:
+		int f=_wopen(m_Filename, O_RDONLY | _O_RAW);
+		__int64	m_uliFreeBytesAvailable,m_uliTotalNumberOfBytes;
+		if( f==-1 || !GetDiskFreeSpaceEx(
+			m_Filename.Left(3),                  // directory name
+			(PULARGE_INTEGER)&m_uliFreeBytesAvailable,         // bytes available to caller
+			(PULARGE_INTEGER)&m_uliTotalNumberOfBytes,         // bytes on disk
+			NULL) )   // free bytes on disk
+		{
+			MessageBox(TEXT("Unable to access hard disk!"));
+			return;
+		}
+		
+		if (m_uliFreeBytesAvailable < (_filelength(f) + 0xFFFF))
+		{
+			MessageBox(TEXT("You don't have enough disk space to write the updater file!"));
+			return;
+		}
+		_close(f);
+
+		CString title, title_new;
+		GetWindowText(title);
+		title_new.Format(TEXT("%s - Writing firmware, please wait..."), title);
+		SetWindowText(title_new);
+
+		if (m_Firmware.GetNumOTFFonts()>0)
+		{
+			COTFFont m_Font;
+			for (DWORD i=0;i<m_Firmware.GetNumOTFFonts();i++)
+			{
+				if (!m_Font.Read(m_Firmware.GetOTFFont(i), FALSE))
+				{
+					MessageBox(TEXT("One of the OTF fonts is damages and therefor iPodWizard cannot write the update as it may cause damage to iPod.\nPlease reload the firmware and make the changes again."));
+					return;
+				}
+				m_Font.SyncChecksums();
+			}
+		}
+
+		theApp.m_SavingFirmware=TRUE;
+
+		m_Firmware.SyncChecksum();
+
+		UpdateChecksums();
+
+		if (!m_RsrcMgr.WriteResource(m_Filename, FIRMWARE_RESOURCE_TYPE, m_Firmware.GetName(), m_Firmware.GetFirmwareBuffer(), m_Firmware.GetFirmwareSize()))
+		{
+			SetWindowText(title);
+			MessageBox(TEXT("Unable to write modified firmware!"));
+		}
+		else
+		{
+			CString s;
+			s.Format(TEXT("1"));
+			if (!m_RsrcMgr.Open(m_Filename))
+			{
+				DWORD err = GetLastError();
+				s.Format(TEXT("Unable to reopen file! Code=%d"), err);
+			}
+			SetWindowText(title);
+			MessageBox(TEXT("Updater modified successfully!\nWarning: According to Apple's EULA, uploading firmware to 3rd party websites is prohibited! Use this firmware for personal use only!"), TEXT("Success"));
+			if (s.Compare(TEXT("1")))
+				MessageBox(s);
+		}
+
+		theApp.m_SavingFirmware=FALSE;
+	}
+	else if (m_FirmMode==2)
+	{
+		if (MessageBox(TEXT("Are you sure you want to write the modified firmware to the file?"), TEXT("Warning"), MB_YESNO) != IDYES)
+			return;
+
+		CString title, title_new;
+		GetWindowText(title);
+		title_new.Format(TEXT("%s - Writing firmware, please wait..."), title);
+		SetWindowText(title_new);
+
+		if (m_Firmware.GetNumOTFFonts()>0)
+		{
+			COTFFont m_Font;
+			for (DWORD i=0;i<m_Firmware.GetNumOTFFonts();i++)
+			{
+				if (!m_Font.Read(m_Firmware.GetOTFFont(i), FALSE))
+				{
+					MessageBox(TEXT("One of the OTF fonts is damages and therefor iPodWizard cannot write the update as it may cause damage to iPod.\nPlease reload the firmware and make the changes again."));
+					return;
+				}
+				m_Font.SyncChecksums();
+			}
+		}
+
+		theApp.m_SavingFirmware=TRUE;
+
+		m_Firmware.SyncChecksum();
+
+		UpdateChecksums();
+
+		CFile f_wr;
+		if (!f_wr.Open(m_FirmwareFile, CFile::modeCreate | CFile::modeWrite))
+		{
+			//error
+			SetWindowText(title);
+			MessageBox(TEXT("Unable to write modified firmware!"));
+		}
+		f_wr.Write(m_Firmware.GetFirmwareBuffer(), m_Firmware.GetFirmwareSize());
+		f_wr.Close();
+
+		theApp.m_SavingFirmware=FALSE;
+		
+		SetWindowText(title);
+		MessageBox(TEXT("Firmware file modified successfully!\nWarning: According to Apple's EULA, uploading firmware to 3rd party websites is prohibited! Use this firmware for personal use only!"), TEXT("Success"));
+	}
+	else if (m_FirmMode==3)
+	{
+		if (MessageBox(TEXT("Are you sure you want to write the modified firmware to the file?"), TEXT("Warning"), MB_YESNO) != IDYES)
+			return;
+
+		//CString filename;
+		//filename.Format(TEXT("firmware_file.bin"));
+
+		//CFileDialog dlg2(FALSE, TEXT("bin"), filename, OFN_HIDEREADONLY | OFN_OVERWRITEPROMPT, TEXT("Binary Files (*.bin)|*.bin||"), this);
+
+		//if (dlg2.DoModal() != IDOK)
+		//	return;
+
+		CString title, title_new;
+		GetWindowText(title);
+		title_new.Format(TEXT("%s - Writing firmware, please wait..."), title);
+		SetWindowText(title_new);
+
+		if (m_Firmware.GetNumOTFFonts()>0)
+		{
+			COTFFont m_Font;
+			for (DWORD i=0;i<m_Firmware.GetNumOTFFonts();i++)
+			{
+				if (!m_Font.Read(m_Firmware.GetOTFFont(i), FALSE))
+				{
+					MessageBox(TEXT("One of the OTF fonts is damages and therefor iPodWizard cannot write the update as it may cause damage to iPod.\nPlease reload the firmware and make the changes again."));
+					return;
+				}
+				m_Font.SyncChecksums();
+			}
+		}
+
+		theApp.m_SavingFirmware=TRUE;
+
+		m_Firmware.SyncChecksum();
+
+		UpdateChecksums();
+
+		///////
+		CZipArchive ipsw2;
+		ipsw2.Open(m_iPSWFile, CZipArchive::zipOpen);
+		/*
+		CFile fw;
+		BOOL bRet = fw.Open(_T("C:\\Documents and Settings\\Administrator\\Application Data\\Apple Computer\\iTunes\\iPod Software Updates\\Firmware-5.4.2.1"), CFile::modeRead | CFile::shareDenyWrite);
+		if (!bRet)
+			return;
+		
+		DWORD iRead;
+		DWORD nBufSize = 65535;
+		CAutoBuffer buf(nBufSize);
+		do
+		{
+			iRead = fw.Read(buf, nBufSize);
+			if (iRead)
+				ipsw2.WriteNewFile(buf, iRead);
+		}
+		while (iRead == buf.GetSize());*/
+		CZipFileHeader finfo;
+		if (!ipsw2.OpenFile(m_iPSW_FID))
+			return;
+		if (!ipsw2.GetFileInfo(finfo, m_iPSW_FID))
+		{
+			//error
+		}
+		ipsw2.CloseFile();
+
+		//LPTSTR lpszInput=finfo.m_szFileName.GetBuffer( finfo.m_szFileName.GetLength() );
+		LPTSTR lpszInput=finfo.m_pszFileName->GetBuffer( finfo.m_pszFileName->GetLength() );
+		//CZipString temp_input=CString(_T(""));
+		
+		//LPTSTR lpszInput=(LPTSTR)(LPCTSTR)temp_input;
+		int nLen=MultiByteToWideChar(CP_ACP, 0, (LPCSTR)lpszInput, -1, NULL, NULL);
+		LPWSTR lpwStr=new WCHAR[nLen*2];
+		nLen=MultiByteToWideChar(CP_ACP, 0, (LPCSTR)lpszInput, -1, lpwStr, nLen);
+		finfo.m_pszFileName->ReleaseBuffer();
+		lpwStr[nLen/2]=0;
+		CString filen(lpwStr);
+		
+		DWORD nBufSize = 65535;
+
+		CFile f_wr;
+		CString papp;
+		GetAppPath(papp);
+		papp.AppendFormat(_T("\\%s"), filen);
+		delete lpwStr;
+		if (!f_wr.Open(papp, CFile::modeCreate | CFile::modeWrite))
+		{
+			//error
+			SetWindowText(title);
+			MessageBox(TEXT("Unable to write modified firmware!"));
+		}
+		f_wr.Write(m_Firmware.GetFirmwareBuffer(), m_Firmware.GetFirmwareSize());
+		f_wr.Close();
+		ipsw2.DeleteFileW(m_iPSW_FID);
+		//if (!ipsw2.DeleteFileW(m_iPSW_FID))
+		//{
+			//error
+		//}
+		//_T("C:\\Documents and Settings\\Administrator\\Application Data\\Apple Computer\\iTunes\\iPod Software Updates\\Firmware-5.4.2.1")
+		ipsw2.AddNewFile(papp);
+		//if (!ipsw2.AddNewFile(papp))
+		//{
+			//error
+		//}
+		DeleteFile(papp);
+		
+		ipsw2.Close();
+		//////
+
+		/*
+		CFile f_wr;
+		if (!f_wr.Open(dlg2.GetPathName(), CFile::modeCreate | CFile::modeWrite))
+		{
+			//error
+			SetWindowText(title);
+			MessageBox(TEXT("Unable to write modified firmware!"));
+		}
+		f_wr.Write(m_Firmware.GetFirmwareBuffer(), m_Firmware.GetFirmwareSize());
+		f_wr.Close();*/
+
+		theApp.m_SavingFirmware=FALSE;
+		
+		SetWindowText(title);
+		MessageBox(TEXT("Firmware file modified successfully!\nWarning: According to Apple's EULA, uploading firmware to 3rd party websites is prohibited! Use this firmware for personal use only!"), TEXT("Success"));
+	}
+}
+void CiPodWizardDlg::OnBnClickedOpenFfile()
+{
+	
+	CScanDialog dlg;
+	CFile f;
+
+	if (m_EditModeCombo.GetCurSel()==2)
+	{
+		CFileDialog dlg2(TRUE, TEXT("*"), TEXT("*"), OFN_HIDEREADONLY, TEXT("Binary files (*)|*||"), this);
+		MO_LOAD_FIRMWARE_PATH(dlg2)
+
+		if (dlg2.DoModal() != IDOK)
+			return;
+		
+		MO_SAVE_FIRMWARE_PATH(dlg2);
+
+		theApp.m_LoadingFirmware = TRUE;
+		m_FirmwareFile.SetString(dlg2.GetPathName());
+
+		f.Open(dlg2.GetPathName(), CFile::modeRead);
+		unsigned char *buf=new unsigned char[(DWORD)f.GetLength()];
+		f.Read(buf, f.GetLength());
+		theApp.BLOCK_SIZE = 512;
+		CString name(_T("A"));
+
+		if (!m_Firmware.SetFirmware(name, buf, (DWORD)f.GetLength()))
+		{
+			MessageBox(TEXT("Unable to allocate memory!"));
+			theApp.m_LoadingFirmware = FALSE;
+			delete buf;
+			return;
+		}
+		delete buf;
+
+		m_FirmwareFileName=dlg2.GetPathName().Right(dlg2.GetPathName().GetLength()-dlg2.GetPathName().ReverseFind('\\')-1);
+		GetDlgItem(IDC_STATIC)->SetWindowText(m_FirmwareFileName);
+
+		UpdateChecksums();
+
+		dlg.Create(dlg.IDD, this);
+		dlg.ScanFirmware(&m_Firmware);
+		dlg.SetWindowTextW(_T("Loading iPodWizard screens..."));
+
+		m_PrefsDialog.SetFirmware(&m_Firmware);
+		m_ThemesDialog.SetFirmware(&m_Firmware, &m_EditorDialog);
+		m_EditorDialog.SetFirmware(&m_Firmware);
+
+		dlg.DestroyWindow();
+		
+		m_FirmMode=2;
+		GetDlgItem(IDC_WRITE_FIRMWARE_BUTTON)->EnableWindow(TRUE);
+		GetDlgItem(IDC_WRITE2IPOD_FIRMWARE_BUTTON)->EnableWindow(TRUE);
+	}
+
+	else
+	{
+		CFileDialog dlg3(TRUE, TEXT("*.ipsw"), TEXT("*.ipsw"), OFN_HIDEREADONLY, TEXT("iPod Software files (*.ipsw)|*.ipsw||"), this);
+		MO_LOAD_FIRMWARE_PATH(dlg3)
+
+		if (dlg3.DoModal() != IDOK)
+			return;
+		MO_SAVE_FIRMWARE_PATH(dlg3)
+
+		m_iPSWFile.SetString(dlg3.GetPathName());
+
+		CZipArchive ipsw;
+		ipsw.Open(m_iPSWFile, CZipArchive::zipOpenReadOnly);
+		CZipFileHeader finfo;
+		int file_id=ipsw.FindFile(_T("manifest.plist"));
+		if (!ipsw.OpenFile(file_id))
+		{
+			MessageBox(_T("iPSW file corrupted!"));
+			return;
+		}
+		if (!ipsw.GetFileInfo(finfo, file_id))
+		{
+			//error
+			MessageBox(_T("iPSW file corrupted!"));
+			return;
+		}
+		m_iPSW_FID=1-file_id;
+		DWORD iRead;
+		DWORD nBufSize = 65535;
+		DWORD ptr=0;
+		unsigned char *buf=new unsigned char[finfo.m_uUncomprSize];
+		CZipAutoBuffer buffer(nBufSize);
+		do
+		{
+			iRead = ipsw.ReadFile(buffer, buffer.GetSize());
+			if (iRead)
+			{
+				memcpy(&buf[ptr], buffer, iRead);
+				ptr+=iRead;
+			}
+		}
+		while (iRead == buffer.GetSize());
+		ipsw.Close();
+		
+		char str[] = "FamilyID</key>\r\n\t<integer>";
+		char str2[] = "VisibleBuildID</key>\r\n\t<integer>";
+		char *p=(char *)memmem(buf, finfo.m_uUncomprSize, str, strlen(str));
+		char *p2=(char *)memmem(buf, finfo.m_uUncomprSize, str2, strlen(str2));
+		int i=0;
+		if (p && p2)
+		{
+			p+=strlen(str);
+			i=0;
+			while (p[i]!='<')
+				i++;
+			p[i]=0;
+			int genid=-1;
+			genid=atoi((char *)p);
+			
+			p2+=strlen(str2);
+			i=0;
+			while (p2[i]!='<')
+				i++;
+			p2[i]=0;
+			long vbuildid=atoi(p2);
+			TCHAR vbuild[20];
+			wsprintf(vbuild, _T("%X"), vbuildid);
+
+			CString final_s;
+			final_s.Format(_T("  Firmware: "));
+			switch (genid)
+			{
+			case 1:
+				final_s.AppendFormat(_T("1st/2nd Generation iPod v"));
+				break;
+			case 2:
+				final_s.AppendFormat(_T("3rd Generation iPod v"));
+				break;
+			case 3:
+				final_s.AppendFormat(_T("iPod mini 2nd Generation v"));
+				break;
+			case 4:
+				final_s.AppendFormat(_T("4th Generation iPod v"));
+				break;
+			case 5:
+				final_s.AppendFormat(_T("iPod Color v"));
+				break;
+			case 7:
+				final_s.AppendFormat(_T("iPod nano 1st Generation v"));
+				break;
+			case 13:
+				final_s.AppendFormat(_T("5th Generation iPod v"));
+				break;
+			case 19:
+				final_s.AppendFormat(_T("iPod nano 2nd Generation v"));
+				break;
+			}
+			for (i=0;i<_tcslen(vbuild)-4;i++)
+			{
+				final_s.AppendFormat(_T("%c"), vbuild[i]);
+				final_s.AppendFormat(_T("%c"), '.');
+			}
+			if (final_s.Right(1).Compare(_T("."))==0)
+				final_s.Truncate(final_s.GetLength()-1);
+			m_FirmwareiPSWFileName=final_s;
+			GetDlgItem(IDC_STATIC)->SetWindowText(m_FirmwareiPSWFileName);
+		}
+
+		delete buf;
+		
+		
+		m_FirmMode=3;
+		GetDlgItem(ID_LOAD_FIRMWARE)->EnableWindow(TRUE);
+
+		theApp.m_LoadingFirmware = TRUE;
+
+		OnBnClickedLoadFirmware();
+	}
+	
+	theApp.m_LoadingFirmware = FALSE;
+	
+}
+void CiPodWizardDlg::OnBnClickedLoadFirmware(){}
+void CiPodWizardDlg::OnBnClickedLoadFirmwareButton(){}
+>>>>>>> Stashed changes
