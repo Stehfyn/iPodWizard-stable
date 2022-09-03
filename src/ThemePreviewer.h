@@ -26,6 +26,7 @@ static struct res_size RES_SIZES[] =
 	{220, 176, _T("220x176 - 4G")},
 	{220, 154, _T("220x154 - Photo")},
 	{176, 132, _T("176x132 - Nano")},
+	{138, 110, _T("138x110 - Mini")}
 };
 
 // CThemePreviewDialog dialog

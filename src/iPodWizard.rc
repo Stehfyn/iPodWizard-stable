@@ -102,7 +102,7 @@ END
 IDD_IPODWIZARD_DIALOG DIALOGEX 0, 0, 450, 380
 STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_MINIMIZEBOX | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
 EXSTYLE WS_EX_APPWINDOW
-CAPTION "iPodWizard v1.3"
+CAPTION "iPodWizard v1.4 experimental"
 FONT 8, "MS Shell Dlg", 0, 0, 0x1
 BEGIN
     PUSHBUTTON      "&Open Updater...",ID_OPEN,96,7,63,14
@@ -532,8 +532,8 @@ END
 //
 
 VS_VERSION_INFO VERSIONINFO
- FILEVERSION 1,3,0,7
- PRODUCTVERSION 1,3,0,7
+ FILEVERSION 1,4,0,0
+ PRODUCTVERSION 1,4,0,0
  FILEFLAGSMASK 0x3fL
 #ifdef _DEBUG
  FILEFLAGS 0x9L
@@ -550,13 +550,13 @@ BEGIN
         BEGIN
             VALUE "CompanyName", "NoCompany - Kingstone Developer"
             VALUE "FileDescription", "iPod Firmware Modifier"
-            VALUE "FileVersion", "1, 3, 0, 7"
+            VALUE "FileVersion", "1, 4, 0, 0"
             VALUE "InternalName", "iPodWizard.exe"
             VALUE "LegalCopyright", " (c) iPodWizard and Kingstone.  All rights reserved."
             VALUE "OriginalFilename", "iPodWizard.exe"
             VALUE "PrivateBuild", "0101"
             VALUE "ProductName", "iPodWizard"
-            VALUE "ProductVersion", "1, 3, 0, 7"
+            VALUE "ProductVersion", "1, 4, 0, 0"
         END
     END
     BLOCK "VarFileInfo"
