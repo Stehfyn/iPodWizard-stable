@@ -1,0 +1,531 @@
+﻿// Created by Microsoft (R) C/C++ Compiler Version 14.00.50727.42 (2cb6bac0).
+//
+// C:\Users\xbox\AppData\Local\Temp\iPodService.tli
+//
+// Wrapper implementations for Win32 type library IPodService.iPodManager.1
+// compiler-generated file created 08/25/22 at 22:41:28 - DO NOT EDIT!
+
+#pragma once
+
+//
+// dispinterface IiPodManager wrapper method implementations
+//
+
+inline HRESULT IiPodManager::RegisterApp ( IPODAPPID appID, _bstr_t appName, _bstr_t appPath, _bstr_t cmdLine ) {
+    return _com_dispatch_method(this, 0x1, DISPATCH_METHOD, VT_EMPTY, NULL, 
+        L"\x0003\x0008\x0008\x0008", appID, (BSTR)appName, (BSTR)appPath, (BSTR)cmdLine);
+}
+
+inline HRESULT IiPodManager::UnregisterApp ( IPODAPPID appID ) {
+    return _com_dispatch_method(this, 0x2, DISPATCH_METHOD, VT_EMPTY, NULL, 
+        L"\x0003", appID);
+}
+
+inline SAFEARRAY * IiPodManager::GetRegisteredApps ( ) {
+    SAFEARRAY * _result = 0;
+    _com_dispatch_method(this, 0x3, DISPATCH_METHOD, VT_ARRAY|VT_I4, (void*)&_result, NULL);
+    return _result;
+}
+
+inline _bstr_t IiPodManager::GetAppNameFromID ( IPODAPPID appID ) {
+    BSTR _result = 0;
+    _com_dispatch_method(this, 0x4, DISPATCH_METHOD, VT_BSTR, (void*)&_result, 
+        L"\x0003", appID);
+    return _bstr_t(_result, false);
+}
+
+inline IPODAPPID IiPodManager::GetAPILockingApp ( ) {
+    IPODAPPID _result;
+    _com_dispatch_method(this, 0x5, DISPATCH_METHOD, VT_I4, (void*)&_result, NULL);
+    return _result;
+}
+
+inline HRESULT IiPodManager::Login ( IPODAPPID appID ) {
+    return _com_dispatch_method(this, 0x6, DISPATCH_METHOD, VT_EMPTY, NULL, 
+        L"\x0003", appID);
+}
+
+inline HRESULT IiPodManager::Logout ( IPODAPPID appID ) {
+    return _com_dispatch_method(this, 0x7, DISPATCH_METHOD, VT_EMPTY, NULL, 
+        L"\x0003", appID);
+}
+
+inline HRESULT IiPodManager::EnableSync ( IPODAPPID appID, HIPOD iPodHandle ) {
+    return _com_dispatch_method(this, 0x8, DISPATCH_METHOD, VT_EMPTY, NULL, 
+        L"\x0003\x0003", appID, iPodHandle);
+}
+
+inline HRESULT IiPodManager::DisableSync ( IPODAPPID appID, HIPOD iPodHandle ) {
+    return _com_dispatch_method(this, 0x9, DISPATCH_METHOD, VT_EMPTY, NULL, 
+        L"\x0003\x0003", appID, iPodHandle);
+}
+
+inline HRESULT IiPodManager::BeginTransfer ( IPODAPPID appID, HIPOD iPodHandle ) {
+    return _com_dispatch_method(this, 0xa, DISPATCH_METHOD, VT_EMPTY, NULL, 
+        L"\x0003\x0003", appID, iPodHandle);
+}
+
+inline HRESULT IiPodManager::EndTransfer ( IPODAPPID appID, HIPOD iPodHandle ) {
+    return _com_dispatch_method(this, 0xb, DISPATCH_METHOD, VT_EMPTY, NULL, 
+        L"\x0003\x0003", appID, iPodHandle);
+}
+
+inline HRESULT IiPodManager::LockiPod ( IPODAPPID appID, HIPOD iPodHandle ) {
+    return _com_dispatch_method(this, 0xc, DISPATCH_METHOD, VT_EMPTY, NULL, 
+        L"\x0003\x0003", appID, iPodHandle);
+}
+
+inline HRESULT IiPodManager::UnlockiPod ( IPODAPPID appID, HIPOD iPodHandle ) {
+    return _com_dispatch_method(this, 0xd, DISPATCH_METHOD, VT_EMPTY, NULL, 
+        L"\x0003\x0003", appID, iPodHandle);
+}
+
+inline IPODAPPID IiPodManager::GetiPodLockingApp ( HIPOD iPodHandle ) {
+    IPODAPPID _result;
+    _com_dispatch_method(this, 0xe, DISPATCH_METHOD, VT_I4, (void*)&_result, 
+        L"\x0003", iPodHandle);
+    return _result;
+}
+
+inline HIPOD IiPodManager::FindFirstiPod ( IPODAPPID appID ) {
+    HIPOD _result;
+    _com_dispatch_method(this, 0xf, DISPATCH_METHOD, VT_I4, (void*)&_result, 
+        L"\x0003", appID);
+    return _result;
+}
+
+inline HIPOD IiPodManager::FindNextiPod ( IPODAPPID appID, HIPOD pCuriPodHandle ) {
+    HIPOD _result;
+    _com_dispatch_method(this, 0x10, DISPATCH_METHOD, VT_I4, (void*)&_result, 
+        L"\x0003\x0003", appID, pCuriPodHandle);
+    return _result;
+}
+
+inline HRESULT IiPodManager::Mount ( IPODAPPID appID, HIPOD iPodHandle ) {
+    return _com_dispatch_method(this, 0x11, DISPATCH_METHOD, VT_EMPTY, NULL, 
+        L"\x0003\x0003", appID, iPodHandle);
+}
+
+inline HRESULT IiPodManager::Unmount ( IPODAPPID appID, HIPOD iPodHandle ) {
+    return _com_dispatch_method(this, 0x12, DISPATCH_METHOD, VT_EMPTY, NULL, 
+        L"\x0003\x0003", appID, iPodHandle);
+}
+
+inline long IiPodManager::IsMounted ( IPODAPPID appID, HIPOD iPodHandle ) {
+    long _result = 0;
+    _com_dispatch_method(this, 0x13, DISPATCH_METHOD, VT_I4, (void*)&_result, 
+        L"\x0003\x0003", appID, iPodHandle);
+    return _result;
+}
+
+inline CURRENCY IiPodManager::GetiPodFreeSpace ( IPODAPPID appID, HIPOD iPodHandle ) {
+    CURRENCY _result;
+    _com_dispatch_method(this, 0x14, DISPATCH_METHOD, VT_CY, (void*)&_result, 
+        L"\x0003\x0003", appID, iPodHandle);
+    return _result;
+}
+
+inline CURRENCY IiPodManager::GetDiskSize ( IPODAPPID appID, HIPOD iPodHandle ) {
+    CURRENCY _result;
+    _com_dispatch_method(this, 0x15, DISPATCH_METHOD, VT_CY, (void*)&_result, 
+        L"\x0003\x0003", appID, iPodHandle);
+    return _result;
+}
+
+inline _bstr_t IiPodManager::GetiPodDriveLetter ( IPODAPPID appID, HIPOD iPodHandle, int format ) {
+    BSTR _result = 0;
+    _com_dispatch_method(this, 0x16, DISPATCH_METHOD, VT_BSTR, (void*)&_result, 
+        L"\x0003\x0003\x0003", appID, iPodHandle, format);
+    return _bstr_t(_result, false);
+}
+
+inline HRESULT IiPodManager::LaunchUpdater ( IPODAPPID callerAppID ) {
+    return _com_dispatch_method(this, 0x17, DISPATCH_METHOD, VT_EMPTY, NULL, 
+        L"\x0003", callerAppID);
+}
+
+inline _bstr_t IiPodManager::GetVersionInfo ( IPODAPPID appID, HIPOD iPodHandle, BSTR * firmwareVersion ) {
+    BSTR _result = 0;
+    _com_dispatch_method(this, 0x18, DISPATCH_METHOD, VT_BSTR, (void*)&_result, 
+        L"\x0003\x0003\x4008", appID, iPodHandle, firmwareVersion);
+    return _bstr_t(_result, false);
+}
+
+inline long IiPodManager::GetAPIVersion ( ) {
+    long _result = 0;
+    _com_dispatch_method(this, 0x19, DISPATCH_METHOD, VT_I4, (void*)&_result, NULL);
+    return _result;
+}
+
+inline enum EFormatState IiPodManager::IsFormatted ( IPODAPPID appID, HIPOD iPodHandle ) {
+    enum EFormatState _result;
+    _com_dispatch_method(this, 0x1a, DISPATCH_METHOD, VT_I4, (void*)&_result, 
+        L"\x0003\x0003", appID, iPodHandle);
+    return _result;
+}
+
+inline _bstr_t IiPodManager::GetVoiceNotesFolderName ( IPODAPPID appID, HIPOD iPodHandle ) {
+    BSTR _result = 0;
+    _com_dispatch_method(this, 0x1b, DISPATCH_METHOD, VT_BSTR, (void*)&_result, 
+        L"\x0003\x0003", appID, iPodHandle);
+    return _bstr_t(_result, false);
+}
+
+inline _bstr_t IiPodManager::GetDeviceUniqueID ( IPODAPPID appID, HIPOD iPodHandle ) {
+    BSTR _result = 0;
+    _com_dispatch_method(this, 0x1c, DISPATCH_METHOD, VT_BSTR, (void*)&_result, 
+        L"\x0003\x0003", appID, iPodHandle);
+    return _bstr_t(_result, false);
+}
+
+inline HRESULT IiPodManager::BeginTransferAsync ( IPODAPPID appID, HIPOD iPodHandle ) {
+    return _com_dispatch_method(this, 0x1d, DISPATCH_METHOD, VT_EMPTY, NULL, 
+        L"\x0003\x0003", appID, iPodHandle);
+}
+
+inline HRESULT IiPodManager::EndTransferAsync ( IPODAPPID appID, HIPOD iPodHandle ) {
+    return _com_dispatch_method(this, 0x1e, DISPATCH_METHOD, VT_EMPTY, NULL, 
+        L"\x0003\x0003", appID, iPodHandle);
+}
+
+inline unsigned short IiPodManager::GetFirmwareVersion ( IPODAPPID appID, HIPOD iPodHandle ) {
+    unsigned short _result = 0;
+    _com_dispatch_method(this, 0x1f, DISPATCH_METHOD, VT_I2, (void*)&_result, 
+        L"\x0003\x0003", appID, iPodHandle);
+    return _result;
+}
+
+inline SAFEARRAY * IiPodManager::GetCheckpointData ( IPODAPPID appID, HIPOD iPodHandle ) {
+    SAFEARRAY * _result = 0;
+    _com_dispatch_method(this, 0x20, DISPATCH_METHOD, VT_ARRAY|VT_UI1, (void*)&_result, 
+        L"\x0003\x0003", appID, iPodHandle);
+    return _result;
+}
+
+inline HRESULT IiPodManager::SetSupportedIPodClasses ( IPODAPPID appID, enum EIPodClass supportedIPodClasses ) {
+    return _com_dispatch_method(this, 0x21, DISPATCH_METHOD, VT_EMPTY, NULL, 
+        L"\x0003\x0003", appID, supportedIPodClasses);
+}
+
+inline enum EIPodClass IiPodManager::GetSupportedIPodClasses ( IPODAPPID appID ) {
+    enum EIPodClass _result;
+    _com_dispatch_method(this, 0x22, DISPATCH_METHOD, VT_I4, (void*)&_result, 
+        L"\x0003", appID);
+    return _result;
+}
+
+//
+// dispinterface IiPodPreferences wrapper method implementations
+//
+
+inline _bstr_t IiPodPreferences::GetDeviceName ( IPODAPPID appID, HIPOD iPodHandle ) {
+    BSTR _result = 0;
+    _com_dispatch_method(this, 0x1, DISPATCH_PROPERTYGET, VT_BSTR, (void*)&_result, 
+        L"\x0003\x0003", appID, iPodHandle);
+    return _bstr_t(_result, false);
+}
+
+inline void IiPodPreferences::PutDeviceName ( IPODAPPID appID, HIPOD iPodHandle, _bstr_t _arg3 ) {
+    _com_dispatch_method(this, 0x1, DISPATCH_PROPERTYPUT, VT_EMPTY, NULL, 
+        L"\x0003\x0003\x0008", appID, iPodHandle, (BSTR)_arg3);
+}
+
+inline _bstr_t IiPodPreferences::GetOwnerName ( IPODAPPID appID, HIPOD iPodHandle ) {
+    BSTR _result = 0;
+    _com_dispatch_method(this, 0x2, DISPATCH_PROPERTYGET, VT_BSTR, (void*)&_result, 
+        L"\x0003\x0003", appID, iPodHandle);
+    return _bstr_t(_result, false);
+}
+
+inline void IiPodPreferences::PutOwnerName ( IPODAPPID appID, HIPOD iPodHandle, _bstr_t _arg3 ) {
+    _com_dispatch_method(this, 0x2, DISPATCH_PROPERTYPUT, VT_EMPTY, NULL, 
+        L"\x0003\x0003\x0008", appID, iPodHandle, (BSTR)_arg3);
+}
+
+inline _bstr_t IiPodPreferences::GetHomeMachineName ( IPODAPPID appID, HIPOD iPodHandle ) {
+    BSTR _result = 0;
+    _com_dispatch_method(this, 0x3, DISPATCH_PROPERTYGET, VT_BSTR, (void*)&_result, 
+        L"\x0003\x0003", appID, iPodHandle);
+    return _bstr_t(_result, false);
+}
+
+inline void IiPodPreferences::PutHomeMachineName ( IPODAPPID appID, HIPOD iPodHandle, _bstr_t _arg3 ) {
+    _com_dispatch_method(this, 0x3, DISPATCH_PROPERTYPUT, VT_EMPTY, NULL, 
+        L"\x0003\x0003\x0008", appID, iPodHandle, (BSTR)_arg3);
+}
+
+inline long IiPodPreferences::GetFireWireDiskUse ( IPODAPPID appID, HIPOD iPodHandle ) {
+    long _result = 0;
+    _com_dispatch_method(this, 0x4, DISPATCH_PROPERTYGET, VT_I4, (void*)&_result, 
+        L"\x0003\x0003", appID, iPodHandle);
+    return _result;
+}
+
+inline void IiPodPreferences::PutFireWireDiskUse ( IPODAPPID appID, HIPOD iPodHandle, long _arg3 ) {
+    _com_dispatch_method(this, 0x4, DISPATCH_PROPERTYPUT, VT_EMPTY, NULL, 
+        L"\x0003\x0003\x0003", appID, iPodHandle, _arg3);
+}
+
+inline long IiPodPreferences::GetLaunchApplication ( IPODAPPID appID, HIPOD iPodHandle ) {
+    long _result = 0;
+    _com_dispatch_method(this, 0x5, DISPATCH_PROPERTYGET, VT_I4, (void*)&_result, 
+        L"\x0003\x0003", appID, iPodHandle);
+    return _result;
+}
+
+inline void IiPodPreferences::PutLaunchApplication ( IPODAPPID appID, HIPOD iPodHandle, long _arg3 ) {
+    _com_dispatch_method(this, 0x5, DISPATCH_PROPERTYPUT, VT_EMPTY, NULL, 
+        L"\x0003\x0003\x0003", appID, iPodHandle, _arg3);
+}
+
+inline IPODAPPID IiPodPreferences::GetHomeApplicationID ( IPODAPPID appID, HIPOD iPodHandle ) {
+    IPODAPPID _result;
+    _com_dispatch_method(this, 0x6, DISPATCH_PROPERTYGET, VT_I4, (void*)&_result, 
+        L"\x0003\x0003", appID, iPodHandle);
+    return _result;
+}
+
+inline void IiPodPreferences::PutHomeApplicationID ( IPODAPPID appID, HIPOD iPodHandle, IPODAPPID _arg3 ) {
+    _com_dispatch_method(this, 0x6, DISPATCH_PROPERTYPUT, VT_EMPTY, NULL, 
+        L"\x0003\x0003\x0003", appID, iPodHandle, _arg3);
+}
+
+inline long IiPodPreferences::GetAutomaticUpdate ( IPODAPPID appID, HIPOD iPodHandle ) {
+    long _result = 0;
+    _com_dispatch_method(this, 0x7, DISPATCH_PROPERTYGET, VT_I4, (void*)&_result, 
+        L"\x0003\x0003", appID, iPodHandle);
+    return _result;
+}
+
+inline void IiPodPreferences::PutAutomaticUpdate ( IPODAPPID appID, HIPOD iPodHandle, long _arg3 ) {
+    _com_dispatch_method(this, 0x7, DISPATCH_PROPERTYPUT, VT_EMPTY, NULL, 
+        L"\x0003\x0003\x0003", appID, iPodHandle, _arg3);
+}
+
+inline enum EAutomaticUpdateMode IiPodPreferences::GetAutomaticUpdateMode ( IPODAPPID appID, HIPOD iPodHandle ) {
+    enum EAutomaticUpdateMode _result;
+    _com_dispatch_method(this, 0x8, DISPATCH_PROPERTYGET, VT_I4, (void*)&_result, 
+        L"\x0003\x0003", appID, iPodHandle);
+    return _result;
+}
+
+inline void IiPodPreferences::PutAutomaticUpdateMode ( IPODAPPID appID, HIPOD iPodHandle, enum EAutomaticUpdateMode _arg3 ) {
+    _com_dispatch_method(this, 0x8, DISPATCH_PROPERTYPUT, VT_EMPTY, NULL, 
+        L"\x0003\x0003\x0003", appID, iPodHandle, _arg3);
+}
+
+inline CURRENCY IiPodPreferences::GetHomeUserID ( IPODAPPID appID, HIPOD iPodHandle ) {
+    CURRENCY _result;
+    _com_dispatch_method(this, 0x9, DISPATCH_PROPERTYGET, VT_CY, (void*)&_result, 
+        L"\x0003\x0003", appID, iPodHandle);
+    return _result;
+}
+
+inline void IiPodPreferences::PutHomeUserID ( IPODAPPID appID, HIPOD iPodHandle, const CURRENCY & _arg3 ) {
+    _com_dispatch_method(this, 0x9, DISPATCH_PROPERTYPUT, VT_EMPTY, NULL, 
+        L"\x0003\x0003\x0006", appID, iPodHandle, &_arg3);
+}
+
+inline long IiPodPreferences::GetConfigured ( IPODAPPID appID, HIPOD iPodHandle ) {
+    long _result = 0;
+    _com_dispatch_method(this, 0xa, DISPATCH_PROPERTYGET, VT_I4, (void*)&_result, 
+        L"\x0003\x0003", appID, iPodHandle);
+    return _result;
+}
+
+inline void IiPodPreferences::PutConfigured ( IPODAPPID appID, HIPOD iPodHandle, long _arg3 ) {
+    _com_dispatch_method(this, 0xa, DISPATCH_PROPERTYPUT, VT_EMPTY, NULL, 
+        L"\x0003\x0003\x0003", appID, iPodHandle, _arg3);
+}
+
+inline HRESULT IiPodPreferences::SetSessionState ( IPODAPPID appID, HIPOD iPodHandle, enum EiPodState sessionState, IPODAPPID sessionHomeAppID ) {
+    return _com_dispatch_method(this, 0xb, DISPATCH_METHOD, VT_EMPTY, NULL, 
+        L"\x0003\x0003\x0003\x0003", appID, iPodHandle, sessionState, sessionHomeAppID);
+}
+
+inline HRESULT IiPodPreferences::SetHomeMachine ( IPODAPPID appID, HIPOD iPodHandle ) {
+    return _com_dispatch_method(this, 0xc, DISPATCH_METHOD, VT_EMPTY, NULL, 
+        L"\x0003\x0003", appID, iPodHandle);
+}
+
+inline long IiPodPreferences::IsItHomeMachine ( IPODAPPID appID, HIPOD iPodHandle ) {
+    long _result = 0;
+    _com_dispatch_method(this, 0xd, DISPATCH_METHOD, VT_I4, (void*)&_result, 
+        L"\x0003\x0003", appID, iPodHandle);
+    return _result;
+}
+
+//
+// dispinterface IiPodUpdater wrapper method implementations
+//
+
+inline IPODAPPID IiPodUpdater::LockAPI ( IPODAPPID updaterID ) {
+    IPODAPPID _result;
+    _com_dispatch_method(this, 0x1, DISPATCH_METHOD, VT_I4, (void*)&_result, 
+        L"\x0003", updaterID);
+    return _result;
+}
+
+inline HRESULT IiPodUpdater::UnlockAPI ( IPODAPPID updaterID ) {
+    return _com_dispatch_method(this, 0x2, DISPATCH_METHOD, VT_EMPTY, NULL, 
+        L"\x0003", updaterID);
+}
+
+inline HRESULT IiPodUpdater::U_InitUpdater ( ) {
+    return _com_dispatch_method(this, 0x3, DISPATCH_METHOD, VT_EMPTY, NULL, NULL);
+}
+
+inline HRESULT IiPodUpdater::U_CloseUpdater ( ) {
+    return _com_dispatch_method(this, 0x4, DISPATCH_METHOD, VT_EMPTY, NULL, NULL);
+}
+
+inline HRESULT IiPodUpdater::U_IsConnected ( ) {
+    return _com_dispatch_method(this, 0x5, DISPATCH_METHOD, VT_EMPTY, NULL, NULL);
+}
+
+inline HRESULT IiPodUpdater::U_Mount ( ) {
+    return _com_dispatch_method(this, 0x6, DISPATCH_METHOD, VT_EMPTY, NULL, NULL);
+}
+
+inline HRESULT IiPodUpdater::U_Open ( ) {
+    return _com_dispatch_method(this, 0x7, DISPATCH_METHOD, VT_EMPTY, NULL, NULL);
+}
+
+inline HRESULT IiPodUpdater::U_LockIPOD ( ) {
+    return _com_dispatch_method(this, 0x8, DISPATCH_METHOD, VT_EMPTY, NULL, NULL);
+}
+
+inline HRESULT IiPodUpdater::U_EraseSector ( unsigned long nSec ) {
+    return _com_dispatch_method(this, 0x9, DISPATCH_METHOD, VT_EMPTY, NULL, 
+        L"\x0003", nSec);
+}
+
+inline HRESULT IiPodUpdater::U_formatFAT32 ( unsigned long dwType, unsigned long dwStart ) {
+    return _com_dispatch_method(this, 0xa, DISPATCH_METHOD, VT_EMPTY, NULL, 
+        L"\x0003\x0003", dwType, dwStart);
+}
+
+inline HRESULT IiPodUpdater::U_WriteMBR ( unsigned long dwType, unsigned long dwStart ) {
+    return _com_dispatch_method(this, 0xb, DISPATCH_METHOD, VT_EMPTY, NULL, 
+        L"\x0003\x0003", dwType, dwStart);
+}
+
+inline HRESULT IiPodUpdater::U_UnlockIPOD ( long fDismount ) {
+    return _com_dispatch_method(this, 0xc, DISPATCH_METHOD, VT_EMPTY, NULL, 
+        L"\x0003", fDismount);
+}
+
+inline HRESULT IiPodUpdater::U_Close ( ) {
+    return _com_dispatch_method(this, 0xd, DISPATCH_METHOD, VT_EMPTY, NULL, NULL);
+}
+
+inline HRESULT IiPodUpdater::U_Unmount ( ) {
+    return _com_dispatch_method(this, 0xe, DISPATCH_METHOD, VT_EMPTY, NULL, NULL);
+}
+
+inline HRESULT IiPodUpdater::U_Disconnect ( ) {
+    return _com_dispatch_method(this, 0xf, DISPATCH_METHOD, VT_EMPTY, NULL, NULL);
+}
+
+inline HRESULT IiPodUpdater::U_GetPowerState ( unsigned long * pdwState ) {
+    return _com_dispatch_method(this, 0x10, DISPATCH_METHOD, VT_EMPTY, NULL, 
+        L"\x4003", pdwState);
+}
+
+inline HRESULT IiPodUpdater::U_Write ( unsigned long start, unsigned long cnt, VARIANT * pVar ) {
+    return _com_dispatch_method(this, 0x11, DISPATCH_METHOD, VT_EMPTY, NULL, 
+        L"\x0003\x0003\x400c", start, cnt, pVar);
+}
+
+inline HRESULT IiPodUpdater::U_GetiPodCount ( unsigned long * pdwCount ) {
+    return _com_dispatch_method(this, 0x12, DISPATCH_METHOD, VT_EMPTY, NULL, 
+        L"\x4003", pdwCount);
+}
+
+inline HRESULT IiPodUpdater::U_GetProgressStatus ( unsigned long * pdwDone, unsigned long * pdwTotal ) {
+    return _com_dispatch_method(this, 0x13, DISPATCH_METHOD, VT_EMPTY, NULL, 
+        L"\x4003\x4003", pdwDone, pdwTotal);
+}
+
+inline HRESULT IiPodUpdater::U_GetDriveLetter ( unsigned long * pchar ) {
+    return _com_dispatch_method(this, 0x14, DISPATCH_METHOD, VT_EMPTY, NULL, 
+        L"\x4003", pchar);
+}
+
+inline HRESULT IiPodUpdater::U_NotifyUpdateComplete ( HIPOD HIPOD ) {
+    return _com_dispatch_method(this, 0x15, DISPATCH_METHOD, VT_EMPTY, NULL, 
+        L"\x0003", HIPOD);
+}
+
+inline HRESULT IiPodUpdater::U_iPodGetHWVersion ( unsigned long * pVersion ) {
+    return _com_dispatch_method(this, 0x16, DISPATCH_METHOD, VT_EMPTY, NULL, 
+        L"\x4003", pVersion);
+}
+
+inline HRESULT IiPodUpdater::U_Execute ( unsigned long param, VARIANT * pvar1, VARIANT * pvar2, VARIANT * pvar3, VARIANT * pvar4, VARIANT * pvar5, VARIANT * pvar6 ) {
+    return _com_dispatch_method(this, 0x17, DISPATCH_METHOD, VT_EMPTY, NULL, 
+        L"\x0003\x400c\x400c\x400c\x400c\x400c\x400c", param, pvar1, pvar2, pvar3, pvar4, pvar5, pvar6);
+}
+
+inline HRESULT IiPodUpdater::U_formatFAT32Ex ( unsigned long dwFlags, unsigned long dwType, unsigned long dwStart, unsigned long dwFirmwareSectors ) {
+    return _com_dispatch_method(this, 0x18, DISPATCH_METHOD, VT_EMPTY, NULL, 
+        L"\x0003\x0003\x0003\x0003", dwFlags, dwType, dwStart, dwFirmwareSectors);
+}
+
+inline HRESULT IiPodUpdater::U_WriteMBREx ( unsigned long dwFlags, unsigned long dwType, unsigned long dwStart, unsigned long dwFirmwareSectors ) {
+    return _com_dispatch_method(this, 0x19, DISPATCH_METHOD, VT_EMPTY, NULL, 
+        L"\x0003\x0003\x0003\x0003", dwFlags, dwType, dwStart, dwFirmwareSectors);
+}
+
+//
+// dispinterface IiPodUser wrapper method implementations
+//
+
+inline unsigned long IiPodUser::RegisterUser ( IUnknown * pUnk, long procID ) {
+    unsigned long _result = 0;
+    _com_dispatch_method(this, 0x1, DISPATCH_METHOD, VT_I4, (void*)&_result, 
+        L"\x000d\x0003", pUnk, procID);
+    return _result;
+}
+
+inline HRESULT IiPodUser::UnregisterUser ( unsigned long userCookie ) {
+    return _com_dispatch_method(this, 0x2, DISPATCH_METHOD, VT_EMPTY, NULL, 
+        L"\x0003", userCookie);
+}
+
+inline HRESULT IiPodUser::OnDisplayiPodManagerUIEvent ( long UIHandle, long SessionHomeApp, long sessionState, long UIStatus ) {
+    return _com_dispatch_method(this, 0x3, DISPATCH_METHOD, VT_EMPTY, NULL, 
+        L"\x0003\x0003\x0003\x0003", UIHandle, SessionHomeApp, sessionState, UIStatus);
+}
+
+//
+// dispinterface _IiPodManagerEvents wrapper method implementations
+//
+
+inline int _IiPodManagerEvents::OnAddTrackStatus ( HDB HDB, long queueID, EFileCopyStatus status, long param, VARIANT * pReserveVar ) {
+    int _result = 0;
+    _com_dispatch_method(this, 0x1, DISPATCH_METHOD, VT_I4, (void*)&_result, 
+        L"\x0003\x0003\x0003\x0003\x400c", HDB, queueID, status, param, pReserveVar);
+    return _result;
+}
+
+inline HRESULT _IiPodManagerEvents::OnDBChanged ( HDB HDB, IPODAPPID changingApp, EDBNotification notification, long handleToModifiedData ) {
+    return _com_dispatch_method(this, 0x2, DISPATCH_METHOD, VT_EMPTY, NULL, 
+        L"\x0003\x0003\x0003\x0003", HDB, changingApp, notification, handleToModifiedData);
+}
+
+inline HRESULT _IiPodManagerEvents::OniPodStatusChanged ( HIPOD HIPOD, EDeviceStatus status, IPODAPPID homeAppID ) {
+    return _com_dispatch_method(this, 0x3, DISPATCH_METHOD, VT_EMPTY, NULL, 
+        L"\x0003\x0003\x0003", HIPOD, status, homeAppID);
+}
+
+inline HRESULT _IiPodManagerEvents::OnLockStatusChanged ( EUnlockNotification status, HIPOD HIPOD ) {
+    return _com_dispatch_method(this, 0x4, DISPATCH_METHOD, VT_EMPTY, NULL, 
+        L"\x0003\x0003", status, HIPOD);
+}
+
+inline long _IiPodManagerEvents::Identify ( ) {
+    long _result = 0;
+    _com_dispatch_method(this, 0x5, DISPATCH_METHOD, VT_I4, (void*)&_result, NULL);
+    return _result;
+}
