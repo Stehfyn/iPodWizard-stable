@@ -5,7 +5,7 @@
 ## About
   
 ## Build Dependencies
-  * - Visual Studio Pro 2005 (VC++ 8.0/MFC 9.0)
+  * - Visual Studio Pro 2005 (VC++ 8.0/MFC 7.0.0 thru 8.0.X)
   * - iTunes 7.0.2.16
 
 ---
